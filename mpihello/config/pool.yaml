@@ -1,0 +1,22 @@
+pool_specification:
+  id: gadget-multinode
+  virtual_network:
+    name: gadget_vnet
+    resource_group: Cloudbenchmark
+    address_space: 10.0.0.0/16
+    create_nonexistant: true
+    subnet:
+      name: gadget-batch-nodes
+      address_prefix: 10.0.1.0/24
+  vm_configuration:
+    platform_image:
+      offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+  vm_count:
+    dedicated: 3
+    low_priority: 0
+  vm_size: STANDARD_D1_V2
+  inter_node_communication_enabled: true
+  ssh:
+    username: root

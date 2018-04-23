@@ -1,0 +1,17 @@
+
+job_specifications:
+  - auto_complete: true
+    id: mpiyello
+    tasks:
+      - docker_image: mdavezac/mpihello:0.0.3
+        multi_instance:
+          num_instances: pool_current_dedicated
+        command: |
+            echo "HELLO $AZ_BATCH_NODE_SHARED_DIR/data"
+            echo "then"
+            ls /mnt/batch/tasks/shared/
+            touch /mnt/batch/tasks/shared/newfile
+            echo "there"
+            ls /mnt/batch/tasks/shared/
+    allow_run_on_missing_image: true
+    remove_container_after_exit: true
