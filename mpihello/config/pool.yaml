@@ -1,10 +1,18 @@
 pool_specification:
   id: gadget-multinode
+  virtual_network:
+    name: gadget_vnet
+    resource_group: Cloudbenchmark
+    address_space: 10.0.0.0/16
+    create_nonexistant: true
+    subnet:
+      name: gadget-batch-nodes
+      address_prefix: 10.0.1.0/24
   vm_configuration:
     platform_image:
-      offer: CentOS-HPC
       publisher: OpenLogic
-      sku: '7.3'
+      offer: CentOS-HPC
+      sku: '7.1'
   vm_count:
     dedicated: 2
     low_priority: 0
