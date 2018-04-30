@@ -16,4 +16,4 @@ function mpirun() {
         "$@"
 }
 
-mpirun python36 -c "from mpi4py import MPI; print('Hello from ', MPI.COMM_WORLD.rank)"
+mpirun python36 /root/job.py

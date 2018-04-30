@@ -1,12 +1,12 @@
 
 job_specifications:
   - auto_complete: true
-    id: mpiyello
+    id: mpihello
     tasks:
-      - docker_image: mdavezac/mpihello:0.0.3
+      - singularity_image: docker://mdavezac/mpihello:0.0.10
         multi_instance:
           num_instances: pool_current_dedicated
-        command: /mnt/resource/batch/tasks/mounts/gadgetcluster/script.sh
+        command: /root/ascript.sh
 
     allow_run_on_missing_image: true
     remove_container_after_exit: true

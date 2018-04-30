@@ -2,21 +2,4 @@ batch_shipyard:
   storage_account_settings: gadget
 global_resources:
   docker_images:
-    - mdavezac/mpihello:0.0.1
-  volumes:
-    shared_data_volumes:
-        gadgetcluster:
-            container_path: $AZ_BATCH_NODE_SHARED_DIR/gadgetcluster
-            mount_options: []
-            volume_driver: storage_cluster
-  files:
-    - destination:
-        data_transfer:
-          method: multinode_scp
-        relative_destination_path: gadgetcluster
-        shared_data_volume: gadgetcluster
-      source:
-        include:
-        - 'script.sh'
-        - '*.py'
-        path: .
+    - mdavezac/mpihello:0.0.3
