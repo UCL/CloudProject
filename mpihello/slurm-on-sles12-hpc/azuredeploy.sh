@@ -77,7 +77,7 @@ install_pkgs()
     pkgs="libbz2-1 libz1 openssl libopenssl-devel gcc gcc-c++ gcc-fortran nfs-client rpcbind mdadm"
 
     if is_master; then
-        pkgs="$pkgs nfs-kernel-server git tmux"
+        pkgs="$pkgs nfs-kernel-server git"
     fi
 
     zypper -n install $pkgs
