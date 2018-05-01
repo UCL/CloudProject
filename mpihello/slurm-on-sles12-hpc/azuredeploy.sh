@@ -180,7 +180,7 @@ install_munge()
     chown munge:munge /etc/munge/munge.key
     chmod 0400 /etc/munge/munge.key
 
-    /etc/init.d/munge start
+    service munge start
 
     cd ..
 }
