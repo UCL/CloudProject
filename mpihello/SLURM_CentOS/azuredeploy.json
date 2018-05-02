@@ -159,23 +159,23 @@
 	      "version": "latest"
 	    },
     "imageReference": "[variables(concat('imageReference_',parameters('image')))]",
-    "newStorageAccountName": "[concat('st', uniqueString(resourceGroup().id))]",
+    "newStorageAccountName": "[concat('gadgetst', uniqueString(resourceGroup().id))]",
     "vmStorageAccountContainerName": "vhd",
     "OSDiskName": "osdisk",
     "publicIPAddressType": "Dynamic",
     "publicIPAddressName": "publicips",
-    "masterVMName": "master",
-    "workerVMName": "worker",
+    "masterVMName": "gadget-master",
+    "workerVMName": "gadget-worker",
 	"armApiVersion": "2015-06-15",
-    "nicName": "nic",
+    "nicName": "gadget-nic",
     "networkSettings": {
-      "virtualNetworkName": "virtualnetwork",
+      "virtualNetworkName": "gadget-vn",
       "addressPrefix": "10.0.0.0/16",
       "subnet": {
         "dse": {
           "name": "dse",
           "prefix": "10.0.0.0/24",
-          "vnet": "virtualnetwork"
+          "vnet": "gagdet-vnet"
         }
       },
       "statics": {
@@ -188,7 +188,7 @@
     },
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
-    "templateBaseUrl": "https://raw.githubusercontent.com/mdavezac/CloudProject/master/SLURM_CentOS/",
+    "templateBaseUrl": "https://raw.githubusercontent.com/mdavezac/CloudProject/master/mpihello/SLURM_CentOS/",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('masterVMName'), ' ', variables('workerVMName'), ' ', parameters('workerNodeCount'), ' ', parameters('hpcUserName'), ' ', variables('templateBaseUrl'))]",
     "storageAccountType": "Standard_LRS"
   },
