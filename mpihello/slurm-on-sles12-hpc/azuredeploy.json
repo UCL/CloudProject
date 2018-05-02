@@ -129,8 +129,8 @@
     "OSDiskName": "osdisk",
     "publicIPAddressType": "Dynamic",
     "publicIPAddressName": "publicips",
-    "masterVMName": "master",
-    "workerVMName": "worker",
+    "masterVMName": "GadgetMaster",
+    "workerVMName": "GadgetWorker",
     "armApiVersion": "2015-06-15",
     "nicName": "nic",
     "networkSettings": {
@@ -153,7 +153,7 @@
     },
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
-    "templateBaseUrl": "https://raw.githubusercontent.com/mdavezac/CloudProject/master/mpihello/slurm-on-sles12-hpc/",
+    "templateBaseUrl": "https://raw.githubusercontent.com/mdavezac/CloudProject/seriously/mpihello/slurm-on-sles12-hpc/",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('masterVMName'), ' ', variables('workerVMName'), ' ', parameters('workerNodeCount'), ' ', parameters('hpcUserName'), ' ', variables('templateBaseUrl'))]",
     "storageAccountType": "Standard_LRS"
   },

@@ -93,8 +93,8 @@ setup_data_disks()
 
     # Loop through and partition disks until not found
     for disk in sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr; do
-        fdisk -l /dev/$disk || break
-        fdisk /dev/$disk << EOF
+        /usr/sbin/fdisk -l /dev/$disk || break
+        /usr/sbin/fdisk /dev/$disk << EOF
 n
 p
 1
@@ -180,7 +180,7 @@ install_munge()
     chown munge:munge /etc/munge/munge.key
     chmod 0400 /etc/munge/munge.key
 
-    /etc/init.d/munge start
+    service munge start
 
     cd ..
 }
