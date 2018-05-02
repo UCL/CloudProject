@@ -44,7 +44,7 @@
     }
   },
   "variables": {
-    "dnsName": "[concat('slurm-', uniqueString(resourceGroup().id))]",
+    "dnsName": "[concat('gadget-slurm-', uniqueString(resourceGroup().id))]",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
     "ubuntuOSVersion": "16.04-LTS",
@@ -54,7 +54,7 @@
     "nicNameMaster": "nic",
     "nicNameWorker": "nic-worker-",
     "networkSettings": {
-      "virtualNetworkName": "virtualnetwork",
+      "virtualNetworkName": "gadgetcluster",
       "addressPrefix": "10.0.0.0/16",
       "subnet": {
         "dse": {
@@ -71,7 +71,7 @@
         "master": "10.0.0.254"
       }
     },
-    "storageAccountName": "[uniqueString(resourceGroup().id)]",
+    "storageAccountName": "[concat('gadgetslur', uniqueString(resourceGroup().id))]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', variables('networkSettings').virtualNetworkName, variables('networkSettings').subnet.dse.name)]",
     "installationCLI": "[concat('sh azuredeploy.sh ', variables('vmNameMaster'), ' ', variables('networkSettings').statics.master, ' ', variables('vmNameWorker'), ' ', variables('networkSettings').statics.workerRange.base, ' ', variables('networkSettings').statics.workerRange.start, ' ', parameters('scaleNumber'), ' ', parameters('adminUsername'), ' ', parameters('adminPassword'), ' ', parameters('_artifactsLocation'))]"
   },

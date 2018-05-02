@@ -129,8 +129,8 @@
     "OSDiskName": "osdisk",
     "publicIPAddressType": "Dynamic",
     "publicIPAddressName": "publicips",
-    "masterVMName": "master",
-    "workerVMName": "worker",
+    "masterVMName": "GadgetMaster",
+    "workerVMName": "GadgetWorker",
     "armApiVersion": "2015-06-15",
     "nicName": "nic",
     "networkSettings": {
