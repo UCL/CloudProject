@@ -31,7 +31,7 @@ resources:
     cidr                    : 10.10.0.0/16
 
     controller_machine_type : n1-standard-2
-    compute_machine_type    : n1-standard-2
+    compute_machine_type    : n1-highmem-16
     login_machine_type      : n1-standard-1
 
     slurm_version           : '17.11.5'
