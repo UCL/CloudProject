@@ -152,7 +152,7 @@ def install_packages():
                 'epel-release',
                 'gcc',
                 'gcc-c++',
-                'gcc-fortran',
+                'gcc-gfortran',
                 'hwloc',
                 'hwloc-devel',
                 'libibmad',
@@ -183,7 +183,10 @@ def install_packages():
                 'vim',
                 'wget',
                 'git',
-                'tmux'
+                'tmux',
+                'libz',
+                'numactl',
+                'numactl-libs'
                ]
 
     while subprocess.call(['yum', 'install', '-y'] + packages):
@@ -748,7 +751,7 @@ def install_spack():
     subprocess.call(shlex.split('git clone https://github.com/spack/spack'),
                     cwd="/apps/")
 
-    with open('/apps/etc/spack/defaults/compilers.yaml', 'w') as f:
+    with open('/apps/spack/etc/spack/defaults/compilers.yaml', 'w') as f:
         f.write("""compilers:
                      - compiler:
                          environment: {}
@@ -765,7 +768,7 @@ def install_spack():
                          target: x86_64
                 """)
 
-    with open('/apps/etc/spack/defaults/packages.yaml', 'w') as f:
+    with open('/apps/spack/etc/spack/defaults/packages.yaml', 'w') as f:
         f.write("""
                 packages:
                   all:
@@ -818,11 +821,11 @@ def install_spack():
                     buildable: false
                 """)
 
-    subprocess.call(shlex.split('/apps/bin/spack install py-mpi4py ^python@3.6.5 ^mpich +pmi'))
-    subprocess.call(shlex.split('/apps/bin/spack install hdf5 +fortran +mpi ^mpich +pmi'))
-    subprocess.call(shlex.split('/apps/bin/spack install fftw +mpi ^mpich +pmi'))
-    subprocess.call(shlex.split('/apps/bin/spack install gsl'))
-    subprocess.call(shlex.split('/apps/bin/spack install swiftsim +mpi ^mpich +pmi'))
+    subprocess.call(shlex.split('/apps/spack/bin/spack install py-mpi4py ^python@3.6.5 ^mpich +pmi'))
+    subprocess.call(shlex.split('/apps/spack/bin/spack install hdf5 +fortran +mpi ^mpich +pmi'))
+    subprocess.call(shlex.split('/apps/spack/bin/spack install fftw +mpi ^mpich +pmi'))
+    subprocess.call(shlex.split('/apps/spack/bin/spack install gsl'))
+    subprocess.call(shlex.split('/apps/spack/bin/spack install swiftsim +mpi ^mpich +pmi'))
 
     with open('/etc/profile.d/spack.sh', 'w') as file:
         file.write("""
