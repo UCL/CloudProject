@@ -16,14 +16,14 @@
     },
     "vmSize": {
       "type": "string",
-      "defaultValue": "Standard_D1_v2",
+      "defaultValue": "Standard_H16mr",
       "metadata": {
         "description": "Size of the nodes."
       }
     },
     "scaleNumber": {
       "type": "int",
-      "defaultValue": 2,
+      "defaultValue": 8,
       "metadata": {
         "description": "This template create N worker node. Use scaleNumber to specify that N."
       }
@@ -44,17 +44,17 @@
     }
   },
   "variables": {
-    "dnsName": "[concat('gadget-slurm-', uniqueString(resourceGroup().id))]",
+    "dnsName": "[concat('nektar-', uniqueString(resourceGroup().id))]",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
     "ubuntuOSVersion": "16.04-LTS",
-    "publicIPAddressName": "publicip",
-    "vmNameMaster": "Gadget-master",
-    "vmNameWorker": "Gadget-worker",
-    "nicNameMaster": "nic",
-    "nicNameWorker": "nic-worker-",
+    "publicIPAddressName": "nektarip",
+    "vmNameMaster": "nektar-master",
+    "vmNameWorker": "nektar-worker",
+    "nicNameMaster": "nektar-nic",
+    "nicNameWorker": "nektar-nic-worker-",
     "networkSettings": {
-      "virtualNetworkName": "gadgetcluster",
+      "virtualNetworkName": "nektar-vn",
       "addressPrefix": "10.0.0.0/16",
       "subnet": {
         "dse": {
@@ -71,16 +71,17 @@
         "master": "10.0.0.254"
       }
     },
-    "storageAccountName": "[concat('gadgetslur', uniqueString(resourceGroup().id))]",
+    "storageAccountName": "[concat('nektar', uniqueString(resourceGroup().id))]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', variables('networkSettings').virtualNetworkName, variables('networkSettings').subnet.dse.name)]",
-    "installationCLI": "[concat('sh azuredeploy.sh ', variables('vmNameMaster'), ' ', variables('networkSettings').statics.master, ' ', variables('vmNameWorker'), ' ', variables('networkSettings').statics.workerRange.base, ' ', variables('networkSettings').statics.workerRange.start, ' ', parameters('scaleNumber'), ' ', parameters('adminUsername'), ' ', parameters('adminPassword'), ' ', parameters('_artifactsLocation'))]"
+    "installationCLI": "[concat('sh azuredeploy.sh ', variables('vmNameMaster'), ' ', variables('networkSettings').statics.master, ' ', variables('vmNameWorker'), ' ', variables('networkSettings').statics.workerRange.base, ' ', variables('networkSettings').statics.workerRange.start, ' ', parameters('scaleNumber'), ' ', parameters('adminUsername'), ' ', parameters('adminPassword'), ' ', parameters('_artifactsLocation'))]",
+    "location": "westeurope"
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
       "apiVersion": "2016-05-01",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "kind": "Storage",
       "sku": {
         "name": "Standard_LRS"
@@ -90,7 +91,7 @@
       "apiVersion": "2016-09-01",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('networkSettings').virtualNetworkName]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -111,7 +112,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2016-09-01",
       "name": "[variables('publicIPAddressName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "properties": {
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
@@ -123,7 +124,7 @@
       "apiVersion": "2016-09-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicNameMaster')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[variables('publicIPAddressName')]",
         "[variables('networkSettings').virtualNetworkName]"
@@ -150,7 +151,7 @@
       "apiVersion": "2016-03-30",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmNameMaster')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[variables('storageAccountName')]",
         "[variables('nicNameMaster')]"
@@ -193,7 +194,7 @@
           "apiVersion": "2016-03-30",
           "type": "extensions",
           "name": "Installation",
-          "location": "[resourceGroup().location]",
+          "location": "[variables('location')]",
           "dependsOn": [
             "[variables('vmNameMaster')]"
           ],
@@ -218,7 +219,7 @@
       "apiVersion": "2016-09-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(variables('nicNameWorker'), copyindex())]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[variables('networkSettings').virtualNetworkName]"
       ],
@@ -245,7 +246,7 @@
       "apiVersion": "2016-03-30",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('vmNameWorker'), copyindex())]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[variables('storageAccountName')]",
         "nicLoop"
