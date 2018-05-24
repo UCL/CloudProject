@@ -160,17 +160,17 @@
 	      "version": "latest"
 	    },
     "imageReference": "[variables(concat('imageReference_',parameters('image')))]",
-    "newStorageAccountName": "[concat('gadgetst', uniqueString(resourceGroup().id))]",
+    "newStorageAccountName": "[concat('swiftst', uniqueString(resourceGroup().id))]",
     "vmStorageAccountContainerName": "vhd",
     "OSDiskName": "osdisk",
     "publicIPAddressType": "Dynamic",
-    "publicIPAddressName": "gadgetpublicips",
-    "masterVMName": "gadget-master",
-    "workerVMName": "gadget-worker",
+    "publicIPAddressName": "swiftpublicips",
+    "masterVMName": "swift-master",
+    "workerVMName": "swift-worker",
 	"armApiVersion": "2015-06-15",
-    "nicName": "gadget-nic",
+    "nicName": "swift-nic",
     "networkSettings": {
-      "virtualNetworkName": "gadget-vn",
+      "virtualNetworkName": "swift-vn",
       "addressPrefix": "10.0.0.0/16",
       "subnet": {
         "dse": {
