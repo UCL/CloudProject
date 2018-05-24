@@ -151,6 +151,7 @@ resources:
   properties:
     zone: {{ properties["zone"] }}
     machineType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ properties["zone"] }}/machineTypes/{{ properties["compute_machine_type"] }}
+    minCpuPlatform: {{ properties["compute_cpu_platform"] }}
     disks:
     - deviceName: boot
       type: PERSISTENT

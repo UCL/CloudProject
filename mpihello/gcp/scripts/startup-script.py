@@ -19,26 +19,24 @@ import os
 import shlex
 import subprocess
 import time
-import urllib
-import urllib2
 
-CLUSTER_NAME      = '@CLUSTER_NAME@'
-MACHINE_TYPE      = '@MACHINE_TYPE@' # e.g. n1-standard-1, n1-starndard-2
-INSTANCE_TYPE     = '@INSTANCE_TYPE@' # e.g. controller, login, compute
+CLUSTER_NAME = '@CLUSTER_NAME@'
+MACHINE_TYPE = '@MACHINE_TYPE@'  # e.g. n1-standard-1, n1-starndard-2
+INSTANCE_TYPE = '@INSTANCE_TYPE@'  # e.g. controller, login, compute
 
-PROJECT           = '@PROJECT@'
-ZONE              = '@ZONE@'
+PROJECT = '@PROJECT@'
+ZONE = '@ZONE@'
 
-APPS_DIR          = '/apps'
-MUNGE_KEY         = '@MUNGE_KEY@'
-SLURM_VERSION     = '@SLURM_VERSION@'
-STATIC_NODE_COUNT = @STATIC_NODE_COUNT@
-MAX_NODE_COUNT    = @MAX_NODE_COUNT@
-DEF_SLURM_ACCT    = '@DEF_SLURM_ACCT@'
-DEF_SLURM_USERS   = '@DEF_SLURM_USERS@'
+APPS_DIR = '/apps'
+MUNGE_KEY = '@MUNGE_KEY@'
+SLURM_VERSION = '@SLURM_VERSION@'
+STATIC_NODE_COUNT = int("@STATIC_NODE_COUNT@")
+MAX_NODE_COUNT = int("@MAX_NODE_COUNT@")
+DEF_SLURM_ACCT = '@DEF_SLURM_ACCT@'
+DEF_SLURM_USERS = '@DEF_SLURM_USERS@'
 EXTERNAL_COMPUTE_IPS = @EXTERNAL_COMPUTE_IPS@
 
-SLURM_PREFIX  = APPS_DIR + '/slurm/slurm-' + SLURM_VERSION
+SLURM_PREFIX = APPS_DIR + '/slurm/slurm-' + SLURM_VERSION
 
 MOTD_HEADER = '''
 
@@ -81,13 +79,17 @@ SSSSSSSSSSSS    SSS    SSSSSSSSSSSSS    SSSS        SSSS     SSSS     SSSS
 
 '''
 
+
 def add_slurm_user():
 
     SLURM_UID = str(992)
     subprocess.call(['groupadd', '-g', SLURM_UID, 'slurm'])
-    subprocess.call(['useradd', '-m', '-c', 'SLURM Workload Manager',
-        '-d', '/var/lib/slurm', '-u', SLURM_UID, '-g', 'slurm',
-        '-s', '/bin/bash', 'slurm'])
+    subprocess.call([
+        'useradd', '-m', '-c', 'SLURM Workload Manager', '-d',
+        '/var/lib/slurm', '-u', SLURM_UID, '-g', 'slurm', '-s', '/bin/bash',
+        'slurm'
+    ])
+
 
 # END add_slurm_user()
 
@@ -112,6 +114,7 @@ complete before making changes in your home directory.
     f.write(msg)
     f.close()
 
+
 # END start_motd()
 
 
@@ -121,16 +124,18 @@ def end_motd():
     f.write(MOTD_HEADER)
     f.close()
 
-    subprocess.call(['wall', '-n',
-        '*** Slurm ' + INSTANCE_TYPE + ' daemon installation complete ***'])
+    subprocess.call([
+        'wall', '-n',
+        '*** Slurm ' + INSTANCE_TYPE + ' daemon installation complete ***'
+    ])
 
     if INSTANCE_TYPE != "controller":
-        subprocess.call(['wall', '-n', """
+        subprocess.call([
+            'wall', '-n', """
 /home on the controller was mounted over the existing /home.
 Either log out and log back in or cd into ~.
-"""])
-
-#END start_motd()
+"""
+        ])
 
 
 def have_internet():
@@ -143,62 +148,39 @@ def have_internet():
         conn.close()
         return False
 
-#END have_internet()
-
 
 def install_packages():
 
-    packages = ['bind-utils',
-                'epel-release',
-                'gcc',
-                'gcc-c++',
-                'gcc-gfortran',
-                'hwloc',
-                'hwloc-devel',
-                'libibmad',
-                'libibumad',
-                'lua',
-                'luajit',
-                'lua-devel',
-                'Lmod'
-                'man2html',
-                'mariadb',
-                'mariadb-devel',
-                'mariadb-server',
-                'munge',
-                'munge-devel',
-                'munge-libs',
-                'ncurses-devel',
-                'nfs-utils',
-                'numactl',
-                'numactl-devel',
-                'openssl-devel',
-                'pam-devel',
-                'perl-ExtUtils-MakeMaker',
-                'python-pip',
-                'python-devel',
-                'readline-devel',
-                'rpm-build',
-                'rrdtool-devel',
-                'vim',
-                'wget',
-                'git',
-                'tmux',
-                'libz',
-                'numactl',
-                'numactl-libs'
-               ]
+    packages = [
+        'bind-utils', 'epel-release', 'gcc', 'gcc-c++', 'gcc-gfortran',
+        'hwloc', 'hwloc-devel', 'libibmad', 'libibumad', 'lua', 'luajit',
+        'luarocks', 'lua-devel', 'Lmod',
+        'man2html', 'mariadb', 'mariadb-devel', 'mariadb-server', 'munge',
+        'munge-devel', 'munge-libs', 'ncurses-devel', 'nfs-utils', 'numactl',
+        'numactl-devel', 'openssl-devel', 'pam-devel',
+        'perl-ExtUtils-MakeMaker', 'python-pip', 'python-devel',
+        'readline-devel', 'rpm-build', 'rrdtool-devel', 'vim', 'wget', 'git',
+        'tmux', 'libz', 'numactl', 'numactl-libs'
+    ]
 
     while subprocess.call(['yum', 'install', '-y'] + packages):
-        print "yum failed to install packages. Trying again in 5 seconds"
+        print("yum failed to install packages. Trying again in 5 seconds")
+        time.sleep(5)
+
+    while subprocess.call(['pip', 'install', '--upgrade', 'pyasn1==0.4.1']):
+        print("failed to install pip. Trying again 5 seconds.")
+        time.sleep(5)
+
+    while subprocess.call(['pip', 'install', '--upgrade', 'pip']):
+        print("failed to install pip. Trying again 5 seconds.")
         time.sleep(5)
 
     while subprocess.call(['pip', 'install', '--upgrade',
-        'google-api-python-client']):
-        print "failed to install google python api client. Trying again 5 seconds."
+                           'google-api-python-client']):
+        print("failed to install google python api client. Trying again 5 "
+              "seconds.")
         time.sleep(5)
 
-#END install_packages()
 
 def setup_munge():
 
@@ -206,14 +188,16 @@ def setup_munge():
     f.write(MUNGE_KEY)
     f.close()
 
-    subprocess.call(['chown', '-R', 'munge:', '/etc/munge/', '/var/log/munge/'])
-    os.chmod('/etc/munge/munge.key' ,0o400)
-    os.chmod('/etc/munge/'          ,0o700)
-    os.chmod('/var/log/munge/'      ,0o700)
+    subprocess.call(
+        ['chown', '-R', 'munge:', '/etc/munge/', '/var/log/munge/'])
+    os.chmod('/etc/munge/munge.key', 0o400)
+    os.chmod('/etc/munge/', 0o700)
+    os.chmod('/var/log/munge/', 0o700)
     subprocess.call(['systemctl', 'enable', 'munge'])
     subprocess.call(['systemctl', 'start', 'munge'])
 
-#END setup_munge ()
+
+# END setup_munge ()
 
 
 def setup_nfs_exports():
@@ -227,7 +211,8 @@ def setup_nfs_exports():
 
     subprocess.call(shlex.split("exportfs -a"))
 
-#END setup_nfs_exports()
+
+# END setup_nfs_exports()
 
 
 def expand_machine_type():
@@ -239,36 +224,39 @@ def expand_machine_type():
     machine = {'sockets': 1, 'cores': 1, 'threads': 1, 'memory': 1}
 
     try:
-        compute = googleapiclient.discovery.build('compute', 'v1',
-                                                  cache_discovery=False)
-        type_resp = compute.machineTypes().get(project=PROJECT, zone=ZONE,
-                machineType=MACHINE_TYPE).execute()
+        compute = googleapiclient.discovery.build(
+            'compute', 'v1', cache_discovery=False)
+        type_resp = compute.machineTypes().get(
+            project=PROJECT, zone=ZONE, machineType=MACHINE_TYPE).execute()
         if type_resp:
             tot_cpus = type_resp['guestCpus']
             if tot_cpus > 1:
-                machine['cores']   = tot_cpus / 2
+                machine['cores'] = tot_cpus / 2
                 machine['threads'] = 2
 
             # Because the actual memory on the host will be different than what
             # is configured (e.g. kernel will take it). From experiments, about
             # 16 MB per GB are used (plus about 400 MB buffer for the first
             # couple of GB's. Using 30 MB to be safe.
-            gb = type_resp['memoryMb'] / 1024;
+            gb = type_resp['memoryMb'] / 1024
             machine['memory'] = type_resp['memoryMb'] - (400 + (gb * 30))
 
-    except Exception, e:
-        print "Failed to get MachineType '%s' from google api (%s)" % (MACHINE_TYPE, str(e))
+    except Exception as e:
+        print("Failed to get MachineType '%s' from google api (%s)" % (
+            MACHINE_TYPE, str(e)))
 
     return machine
-#END expand_machine_type()
+
+
+# END expand_machine_type()
 
 
 def install_slurm_conf():
 
     machine = expand_machine_type()
-    def_mem_per_cpu = max(100,
-            (machine['memory'] /
-             (machine['threads']*machine['cores']*machine['sockets'])))
+    def_mem_per_cpu = max(
+        100, (machine['memory'] /
+              (machine['threads'] * machine['cores'] * machine['sockets'])))
 
     conf = """
 # slurm.conf file generated by configurator.html.
@@ -438,13 +426,13 @@ SuspendTime=1800
 #
 #
 # COMPUTE NODES
-""".format(cluster_name = CLUSTER_NAME, apps_dir = APPS_DIR,
-        def_mem_per_cpu = def_mem_per_cpu)
+""".format(cluster_name=CLUSTER_NAME, apps_dir=APPS_DIR,
+           def_mem_per_cpu=def_mem_per_cpu)
 
     conf += """
 NodeName=DEFAULT Sockets=%d CoresPerSocket=%d ThreadsPerCore=%d RealMemory=%d State=UNKNOWN
 """ % (machine['sockets'], machine['cores'], machine['threads'],
-        machine['memory'])
+       machine['memory'])
 
     static_range = ""
     if STATIC_NODE_COUNT and STATIC_NODE_COUNT > 1:
@@ -454,7 +442,7 @@ NodeName=DEFAULT Sockets=%d CoresPerSocket=%d ThreadsPerCore=%d RealMemory=%d St
 
     cloud_range = ""
     if MAX_NODE_COUNT and (MAX_NODE_COUNT != STATIC_NODE_COUNT):
-        cloud_range = "[%d-%d]" % (STATIC_NODE_COUNT+1, MAX_NODE_COUNT)
+        cloud_range = "[%d-%d]" % (STATIC_NODE_COUNT + 1, MAX_NODE_COUNT)
 
     if static_range:
         conf += """
@@ -466,7 +454,7 @@ NodeName=compute{0}
         conf += "NodeName=compute%s State=CLOUD" % cloud_range
 
     conf += """
-PartitionName=debug Nodes=compute[1-%d] Default=YES MaxTime=INFINITE State=UP
+PartitionName=debug Nodes=compute[1-%d] Default=YES MaxTime=INFINITE OverSubscribe=EXCLUSIVE State=UP
 """ % MAX_NODE_COUNT
 
     etc_dir = SLURM_PREFIX + '/etc'
@@ -475,7 +463,9 @@ PartitionName=debug Nodes=compute[1-%d] Default=YES MaxTime=INFINITE State=UP
     f = open(etc_dir + '/slurm.conf', 'w')
     f.write(conf)
     f.close()
-#END install_slurm_conf()
+
+
+# END install_slurm_conf()
 
 
 def install_slurmdbd_conf():
@@ -512,7 +502,7 @@ StorageType=accounting_storage/mysql
 #StorageUser=database_mgr
 #StoragePass=shazaam
 
-""".format(apps_dir = APPS_DIR)
+""".format(apps_dir=APPS_DIR)
     etc_dir = SLURM_PREFIX + '/etc'
     if not os.path.exists(etc_dir):
         os.makedirs(etc_dir)
@@ -520,7 +510,8 @@ StorageType=accounting_storage/mysql
     f.write(conf)
     f.close()
 
-#END install_slurmdbd_conf()
+
+# END install_slurmdbd_conf()
 
 
 def install_cgroup_conf():
@@ -540,7 +531,8 @@ TaskAffinity=no
     f.write(conf)
     f.close()
 
-#END install_cgroup_conf()
+
+# END install_cgroup_conf()
 
 
 def install_suspend_progs():
@@ -551,42 +543,45 @@ def install_suspend_progs():
     GOOGLE_URL = "http://metadata.google.internal/computeMetadata/v1/instance/attributes"
 
     # Suspend
-    req = urllib2.Request(GOOGLE_URL + '/slurm_suspend')
-    req.add_header('Metadata-Flavor', 'Google')
-    resp = urllib2.urlopen(req)
-
-    f = open(APPS_DIR + '/slurm/scripts/suspend.py', 'w')
-    f.write(resp.read())
-    f.close()
+    with open(APPS_DIR + '/slurm/scripts/suspend.py', 'w') as file:
+        subprocess.call(
+            [
+                "curl", "-L", GOOGLE_URL + "/slurm_suspend", "-H",
+                "Metadata-Flavor: Google"
+            ],
+            stdout=file)
     os.chmod(APPS_DIR + '/slurm/scripts/suspend.py', 0o755)
 
     # Resume
-    req = urllib2.Request(GOOGLE_URL + '/slurm_resume')
-    req.add_header('Metadata-Flavor', 'Google')
-    resp = urllib2.urlopen(req)
-
-    f = open(APPS_DIR + '/slurm/scripts/resume.py', 'w')
-    f.write(resp.read())
-    f.close()
+    with open(APPS_DIR + '/slurm/scripts/resume.py', 'w') as file:
+        subprocess.call(
+            [
+                "curl", "-L", GOOGLE_URL + "/slurm_resume", "-H",
+                "Metadata-Flavor: Google"
+            ],
+            stdout=file)
     os.chmod(APPS_DIR + '/slurm/scripts/resume.py', 0o755)
 
     # Startup script
-    req = urllib2.Request(GOOGLE_URL + '/startup-script-compute')
-    req.add_header('Metadata-Flavor', 'Google')
-    resp = urllib2.urlopen(req)
-
-    f = open(APPS_DIR + '/slurm/scripts/startup-script.py', 'w')
-    f.write(resp.read())
-    f.close()
+    with open(APPS_DIR + '/slurm/scripts/startup-script.py', 'w') as file:
+        subprocess.call(
+            [
+                "curl", "-L", GOOGLE_URL + "/startup-script-compute", "-H",
+                "Metadata-Flavor: Google"
+            ],
+            stdout=file)
     os.chmod(APPS_DIR + '/slurm/scripts/startup-script.py', 0o755)
 
-#END install_suspend_progs()
+
+# END install_suspend_progs()
+
 
 def install_slurm():
 
     SCHEDMD_URL = 'https://download.schedmd.com/slurm/'
     file = "slurm-%s.tar.bz2" % SLURM_VERSION
-    urllib.urlretrieve(SCHEDMD_URL + file, '/tmp/' + file)
+    print(SCHEDMD_URL + file)
+    subprocess.call(['curl', '-L', SCHEDMD_URL + file, '-o', '/tmp/' + file])
 
     prev_path = os.getcwd()
 
@@ -596,11 +591,15 @@ def install_slurm():
     if not os.path.exists('build'):
         os.makedirs('build')
     os.chdir('build')
-    subprocess.call(['../configure', '--prefix=%s' % SLURM_PREFIX,
-                     '--sysconfdir=%s/slurm/current/etc' % APPS_DIR])
+    subprocess.call([
+        '../configure',
+        '--prefix=%s' % SLURM_PREFIX,
+        '--sysconfdir=%s/slurm/current/etc' % APPS_DIR
+    ])
     subprocess.call(['make', '-j', 'install'])
 
-    subprocess.call(shlex.split("ln -s %s %s/slurm/current" % (SLURM_PREFIX, APPS_DIR)))
+    subprocess.call(
+        shlex.split("ln -s %s %s/slurm/current" % (SLURM_PREFIX, APPS_DIR)))
 
     os.chdir(prev_path)
 
@@ -616,7 +615,9 @@ def install_slurm():
     install_cgroup_conf()
     install_suspend_progs()
 
-#END install_slurm()
+
+# END install_slurm()
+
 
 def install_slurm_tmpfile():
 
@@ -634,7 +635,9 @@ d %s 0755 slurm slurm -
     os.chmod(run_dir, 0o755)
     subprocess.call(['chown', 'slurm:', run_dir])
 
-#END install_slurm_tmpfile()
+
+# END install_slurm_tmpfile()
+
 
 def install_controller_service_scripts():
 
@@ -657,7 +660,7 @@ PIDFile=/var/run/slurm/slurmctld.pid
 
 [Install]
 WantedBy=multi-user.target
-""".format(prefix = SLURM_PREFIX))
+""".format(prefix=SLURM_PREFIX))
     f.close()
 
     os.chmod('/usr/lib/systemd/system/slurmctld.service', 0o644)
@@ -679,12 +682,13 @@ PIDFile=/var/run/slurm/slurmdbd.pid
 
 [Install]
 WantedBy=multi-user.target
-""".format(prefix = APPS_DIR + "/slurm/current"))
+""".format(prefix=APPS_DIR + "/slurm/current"))
     f.close()
 
     os.chmod('/usr/lib/systemd/system/slurmdbd.service', 0o644)
 
-#END install_controller_service_scripts()
+
+# END install_controller_service_scripts()
 
 
 def install_compute_service_scripts():
@@ -712,12 +716,13 @@ LimitSTACK=infinity
 
 [Install]
 WantedBy=multi-user.target
-""".format(prefix = APPS_DIR + "/slurm/current"))
+""".format(prefix=APPS_DIR + "/slurm/current"))
     f.close()
 
     os.chmod('/usr/lib/systemd/system/slurmd.service', 0o644)
 
-#END install_compute_service_scripts()
+
+# END install_compute_service_scripts()
 
 
 def setup_bash_profile():
@@ -729,7 +734,8 @@ PATH=$PATH:$S_PATH/bin:$S_PATH/sbin
 """ % APPS_DIR)
     f.close()
 
-#END setup_bash_profile()
+
+# END setup_bash_profile()
 
 
 def mount_nfs_vols():
@@ -742,14 +748,16 @@ controller:/home  /home   nfs      rw,sync,hard,intr  0     0
     f.close()
 
     while subprocess.call(['mount', '-a']):
-        print "Waiting for " + APPS_DIR + " and /home to be mounted"
+        print("Waiting for " + APPS_DIR + " and /home to be mounted")
         time.sleep(5)
 
-#END mount_nfs_vols()
+
+# END mount_nfs_vols()
+
 
 def install_spack():
-    subprocess.call(shlex.split('git clone https://github.com/spack/spack'),
-                    cwd="/apps/")
+    subprocess.call(
+        shlex.split('git clone https://github.com/spack/spack'), cwd="/apps/")
 
     with open('/apps/spack/etc/spack/defaults/compilers.yaml', 'w') as f:
         f.write("""compilers:
@@ -790,7 +798,7 @@ def install_spack():
                       opencl: [pocl]
                       openfoam: [openfoam-com, openfoam-org, foam-extend]
                       pil: [py-pillow]
-                      pkgconfig: [pkgconf, pkg-config]
+                      pkgconfig: [pkg-config, pkgconf]
                       scalapack: [netlib-scalapack]
                       szip: [libszip, libaec]
                       tbb: [intel-tbb]
@@ -809,7 +817,7 @@ def install_spack():
                     buildable: false
                   git:
                     paths:
-                       git@1.8.3.1: /usr
+                        git: /usr
                     buildable: false
                   zlib:
                     paths:
@@ -819,35 +827,54 @@ def install_spack():
                     paths:
                        python@3.6.5: /usr
                     buildable: false
+                  pkg-config:
+                    paths:
+                       pkg-config@0.27.1: /usr
+                    buildable: false
                 """)
 
-    subprocess.call(shlex.split('/apps/spack/bin/spack install py-mpi4py ^python@3.6.5 ^mpich +pmi'))
-    subprocess.call(shlex.split('/apps/spack/bin/spack install hdf5 +fortran +mpi ^mpich +pmi'))
-    subprocess.call(shlex.split('/apps/spack/bin/spack install fftw +mpi ^mpich +pmi'))
-    subprocess.call(shlex.split('/apps/spack/bin/spack install gsl'))
-    subprocess.call(shlex.split('/apps/spack/bin/spack install swiftsim +mpi ^mpich +pmi'))
+    subprocess.call(shlex.split('chmod -R a+rX /apps/spack'))
+
+#   subprocess.call(shlex.split('/apps/spack/bin/spack install py-mpi4py ^python@3.6.5 ^mpich +pmi'))
+#   subprocess.call(shlex.split('/apps/spack/bin/spack install hdf5 +fortran +mpi ^mpich +pmi'))
+#   subprocess.call(shlex.split('/apps/spack/bin/spack install fftw +mpi ^mpich +pmi'))
+#   subprocess.call(shlex.split('/apps/spack/bin/spack install gsl'))
+#   subprocess.call(shlex.split('/apps/spack/bin/spack install swiftsim +mpi ^mpich +pmi'))
+
+
+def install_spack_bashrc():
 
     with open('/etc/profile.d/spack.sh', 'w') as file:
         file.write("""
             export SPACK_ROOT=/apps/spack
-            source $PACK_ROOT/share/spack/setup-evn.sh
-            source $PACK_ROOT/share/spack/completion.bash
+            source $SPACK_ROOT/share/spack/setup-env.sh
+            source $SPACK_ROOT/share/spack/spack-completion.bash
             """)
+
+
+def install_memlock_limit():
+    with open('/etc/security/limits.d/memlock.conf', 'w') as file:
+        file.write("""* soft memlock -1\n* hard memlock -1""")
+
 
 def main():
     # Disable SELinux
     subprocess.call(shlex.split('setenforce 0'))
 
-    if ((INSTANCE_TYPE == "controller") and  not EXTERNAL_COMPUTE_IPS):
+    if ((INSTANCE_TYPE == "controller") and not EXTERNAL_COMPUTE_IPS):
         # Setup a NAT gateway for the compute instances to get internet from.
         subprocess.call(shlex.split("sysctl -w net.ipv4.ip_forward=1"))
-        subprocess.call(shlex.split("firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -o eth0 -j MASQUERADE"))
+        subprocess.call(
+            shlex.split(
+                "firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -o eth0 -j MASQUERADE"
+            ))
         subprocess.call(shlex.split("firewall-cmd --reload"))
-        subprocess.call(shlex.split("echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf"))
+        subprocess.call(
+            shlex.split("echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf"))
 
     if INSTANCE_TYPE == "compute":
         while not have_internet():
-            print "Waiting for internet connection"
+            print("Waiting for internet connection")
 
     add_slurm_user()
     start_motd()
@@ -872,12 +899,16 @@ def main():
         subprocess.call(shlex.split('systemctl enable mariadb'))
         subprocess.call(shlex.split('systemctl start mariadb'))
 
-	subprocess.call(['mysql', '-u', 'root', '-e',
-	    "create user 'slurm'@'localhost'"])
-	subprocess.call(['mysql', '-u', 'root', '-e',
-	    "grant all on slurm_acct_db.* TO 'slurm'@'localhost';"])
-	subprocess.call(['mysql', '-u', 'root', '-e',
-	    "grant all on slurm_acct_db.* TO 'slurm'@'controller';"])
+        subprocess.call(
+            ['mysql', '-u', 'root', '-e', "create user 'slurm'@'localhost'"])
+        subprocess.call([
+            'mysql', '-u', 'root', '-e',
+            "grant all on slurm_acct_db.* TO 'slurm'@'localhost';"
+        ])
+        subprocess.call([
+            'mysql', '-u', 'root', '-e',
+            "grant all on slurm_acct_db.* TO 'slurm'@'controller';"
+        ])
 
         subprocess.call(shlex.split('systemctl enable slurmdbd'))
         subprocess.call(shlex.split('systemctl start slurmdbd'))
@@ -885,9 +916,15 @@ def main():
         # Wait for slurmdbd to come up
         time.sleep(5)
 
-        subprocess.call(shlex.split(SLURM_PREFIX + '/bin/sacctmgr -i add cluster ' + CLUSTER_NAME))
-        subprocess.call(shlex.split(SLURM_PREFIX + '/bin/sacctmgr -i add account ' + DEF_SLURM_ACCT))
-        subprocess.call(shlex.split(SLURM_PREFIX + '/bin/sacctmgr -i add user ' + DEF_SLURM_USERS + ' account=' + DEF_SLURM_ACCT))
+        subprocess.call(
+            shlex.split(SLURM_PREFIX + '/bin/sacctmgr -i add cluster ' +
+                        CLUSTER_NAME))
+        subprocess.call(
+            shlex.split(SLURM_PREFIX + '/bin/sacctmgr -i add account ' +
+                        DEF_SLURM_ACCT))
+        subprocess.call(
+            shlex.split(SLURM_PREFIX + '/bin/sacctmgr -i add user ' +
+                        DEF_SLURM_USERS + ' account=' + DEF_SLURM_ACCT))
 
         subprocess.call(shlex.split('systemctl enable slurmctld'))
         subprocess.call(shlex.split('systemctl start slurmctld'))
@@ -896,19 +933,22 @@ def main():
         subprocess.call(shlex.split('systemctl enable nfs-server'))
         subprocess.call(shlex.split('systemctl start nfs-server'))
         setup_nfs_exports()
-        install_spack()
 
     elif INSTANCE_TYPE == "compute":
         install_compute_service_scripts()
+        install_memlock_limit()
         subprocess.call(shlex.split('systemctl enable slurmd'))
         subprocess.call(shlex.split('systemctl start slurmd'))
+    elif INSTANCE_TYPE == "login":
+        install_memlock_limit()
+        install_spack()
+
+    install_spack_bashrc()
 
     end_motd()
 
-# END main()
 
+# END main()
 
 if __name__ == '__main__':
     main()
-
-

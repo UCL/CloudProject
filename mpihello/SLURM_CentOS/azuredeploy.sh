@@ -63,7 +63,8 @@ is_master()
 install_pkgs()
 {
     yum -y install epel-release
-    yum -y install zlib zlib-devel bzip2 bzip2-devel bzip2-libs openssl openssl-devel openssl-libs gcc gcc-c++ nfs-utils rpcbind mdadm wget python-pip
+    yum upgrade -y
+    yum -y install zlib zlib-devel bzip2 bzip2-devel bzip2-libs openssl openssl-devel openssl-libs gcc gcc-c++ gcc-fortran nfs-utils rpcbind mdadm wget python-pip
 }
 
 # Partitions all data disks attached to the VM and creates

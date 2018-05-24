@@ -72,6 +72,7 @@
       "type": "string",
       "defaultValue": "Standard_A9",
       "allowedValues": [
+        "Standard_H16mr",
         "Standard_A1",
         "Standard_A2",
         "Standard_A3",

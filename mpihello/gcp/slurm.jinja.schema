@@ -77,6 +77,11 @@ properties:
     maximum     : 64000
     description : Size of disk for compute nodes.
 
+  compute_cpu_platform:
+    enum        : ["Intel Broadwell", "Intel Skylake", "Intel Haswell"]
+    default     : "Intel Skylake"
+    description : CPU type
+
   controller_machine_type:
     type        : string
     description : |
