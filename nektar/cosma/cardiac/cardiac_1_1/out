@@ -1,0 +1,132 @@
+Writing: "Conductivity_xx.fld" (0.802275s, XML)
+Writing: "Conductivity_xy.fld" (0.107716s, XML)
+Writing: "Conductivity_yy.fld" (0.790016s, XML)
+Writing: "Conductivity_xz.fld" (0.108514s, XML)
+Writing: "Conductivity_yz.fld" (0.111361s, XML)
+Writing: "Conductivity_zz.fld" (0.799958s, XML)
+=======================================================================
+	        EquationType: Monodomain
+	        Session Name: patient_tn_refined_p6_iso
+	        Spatial Dim.: 3
+	  Max SEM Exp. Order: 6
+	      Expansion Dim.: 2
+	     Projection Type: Continuous Galerkin
+	           Advection: explicit
+	           Diffusion: implicit
+	           Time Step: 0.02
+	        No. of Steps: 150000
+	 Checkpoints (steps): 50
+	    Integration Type: IMEXOrder1
+	          Cell model: CourtemancheRamirezNattel98
+	     Cell model var.: Original
+=======================================================================
+Initial Conditions:
+  - Field u: -81
+Writing: "patient_tn_refined_p6_iso_0.chk" (0.828642s, XML)
+Steps: 1        Time: 0.02         CPU Time: 62.9538s
+Steps: 2        Time: 0.04         CPU Time: 16.3444s
+Steps: 3        Time: 0.06         CPU Time: 16.3196s
+Steps: 4        Time: 0.08         CPU Time: 16.3176s
+Steps: 5        Time: 0.1          CPU Time: 16.3129s
+Steps: 6        Time: 0.12         CPU Time: 16.3435s
+Steps: 7        Time: 0.14         CPU Time: 16.3157s
+Steps: 8        Time: 0.16         CPU Time: 16.3149s
+Steps: 9        Time: 0.18         CPU Time: 16.3142s
+Steps: 10       Time: 0.2          CPU Time: 16.3474s
+Steps: 11       Time: 0.22         CPU Time: 16.3141s
+Steps: 12       Time: 0.24         CPU Time: 16.3192s
+Steps: 13       Time: 0.26         CPU Time: 16.3168s
+Steps: 14       Time: 0.28         CPU Time: 16.3471s
+Steps: 15       Time: 0.3          CPU Time: 16.3182s
+Steps: 16       Time: 0.32         CPU Time: 16.3187s
+Steps: 17       Time: 0.34         CPU Time: 16.3462s
+Steps: 18       Time: 0.36         CPU Time: 16.314s 
+Steps: 19       Time: 0.38         CPU Time: 16.3115s
+Steps: 20       Time: 0.4          CPU Time: 16.3853s
+Steps: 21       Time: 0.42         CPU Time: 16.3449s
+Steps: 22       Time: 0.44         CPU Time: 16.3162s
+Steps: 23       Time: 0.46         CPU Time: 16.3148s
+Steps: 24       Time: 0.48         CPU Time: 16.3147s
+Steps: 25       Time: 0.5          CPU Time: 16.3413s
+Steps: 26       Time: 0.52         CPU Time: 16.315s 
+Steps: 27       Time: 0.54         CPU Time: 16.319s 
+Steps: 28       Time: 0.56         CPU Time: 16.321s 
+Steps: 29       Time: 0.58         CPU Time: 16.4088s
+Steps: 30       Time: 0.6          CPU Time: 16.3182s
+Steps: 31       Time: 0.62         CPU Time: 16.3212s
+Steps: 32       Time: 0.64         CPU Time: 16.3403s
+Steps: 33       Time: 0.66         CPU Time: 16.3151s
+Steps: 34       Time: 0.68         CPU Time: 16.3168s
+Steps: 35       Time: 0.7          CPU Time: 16.3297s
+Steps: 36       Time: 0.72         CPU Time: 16.4188s
+Steps: 37       Time: 0.74         CPU Time: 16.3142s
+Steps: 38       Time: 0.76         CPU Time: 16.3154s
+Steps: 39       Time: 0.78         CPU Time: 16.3331s
+Steps: 40       Time: 0.8          CPU Time: 16.3549s
+Steps: 41       Time: 0.82         CPU Time: 16.3303s
+Steps: 42       Time: 0.84         CPU Time: 16.3299s
+Steps: 43       Time: 0.86         CPU Time: 16.407s 
+Steps: 44       Time: 0.88         CPU Time: 16.3552s
+Steps: 45       Time: 0.9          CPU Time: 16.3295s
+Steps: 46       Time: 0.92         CPU Time: 16.4017s
+Steps: 47       Time: 0.94         CPU Time: 16.3533s
+Steps: 48       Time: 0.96         CPU Time: 16.4129s
+Steps: 49       Time: 0.98         CPU Time: 16.4148s
+Steps: 50       Time: 1            CPU Time: 16.4282s
+Writing: "patient_tn_refined_p6_iso_1.chk" (0.831427s, XML)
+Steps: 51       Time: 1.02         CPU Time: 16.4466s
+Steps: 52       Time: 1.04         CPU Time: 16.4204s
+Steps: 53       Time: 1.06         CPU Time: 16.4164s
+Steps: 54       Time: 1.08         CPU Time: 16.323s 
+Steps: 55       Time: 1.1          CPU Time: 16.4369s
+Steps: 56       Time: 1.12         CPU Time: 16.3264s
+Steps: 57       Time: 1.14         CPU Time: 16.414s 
+Steps: 58       Time: 1.16         CPU Time: 16.3296s
+Steps: 59       Time: 1.18         CPU Time: 16.433s 
+Steps: 60       Time: 1.2          CPU Time: 16.324s 
+Steps: 61       Time: 1.22         CPU Time: 16.3252s
+Steps: 62       Time: 1.24         CPU Time: 16.4408s
+Steps: 63       Time: 1.26         CPU Time: 16.3236s
+Steps: 64       Time: 1.28         CPU Time: 16.3267s
+Steps: 65       Time: 1.3          CPU Time: 16.4216s
+Steps: 66       Time: 1.32         CPU Time: 16.3452s
+Steps: 67       Time: 1.34         CPU Time: 16.326s 
+Steps: 68       Time: 1.36         CPU Time: 16.3933s
+Steps: 69       Time: 1.38         CPU Time: 16.3228s
+Steps: 70       Time: 1.4          CPU Time: 16.3473s
+Steps: 71       Time: 1.42         CPU Time: 16.3254s
+Steps: 72       Time: 1.44         CPU Time: 16.3447s
+Steps: 73       Time: 1.46         CPU Time: 16.3564s
+Steps: 74       Time: 1.48         CPU Time: 16.3909s
+Steps: 75       Time: 1.5          CPU Time: 16.3237s
+Steps: 76       Time: 1.52         CPU Time: 16.3226s
+Steps: 77       Time: 1.54         CPU Time: 16.3441s
+Steps: 78       Time: 1.56         CPU Time: 16.3928s
+Steps: 79       Time: 1.58         CPU Time: 16.3206s
+Steps: 80       Time: 1.6          CPU Time: 16.3182s
+Steps: 81       Time: 1.62         CPU Time: 16.3477s
+Steps: 82       Time: 1.64         CPU Time: 16.3209s
+Steps: 83       Time: 1.66         CPU Time: 16.3192s
+Steps: 84       Time: 1.68         CPU Time: 16.3905s
+Steps: 85       Time: 1.7          CPU Time: 16.3378s
+Steps: 86       Time: 1.72         CPU Time: 16.323s 
+Steps: 87       Time: 1.74         CPU Time: 16.3186s
+Steps: 88       Time: 1.76         CPU Time: 16.4141s
+Steps: 89       Time: 1.78         CPU Time: 16.3187s
+Steps: 90       Time: 1.8          CPU Time: 16.3162s
+Steps: 91       Time: 1.82         CPU Time: 16.3192s
+Steps: 92       Time: 1.84         CPU Time: 16.3439s
+Steps: 93       Time: 1.86         CPU Time: 16.3272s
+Steps: 94       Time: 1.88         CPU Time: 16.322s 
+Steps: 95       Time: 1.9          CPU Time: 16.3913s
+Steps: 96       Time: 1.92         CPU Time: 16.3416s
+Steps: 97       Time: 1.94         CPU Time: 16.3201s
+Steps: 98       Time: 1.96         CPU Time: 16.3167s
+Steps: 99       Time: 1.98         CPU Time: 16.3133s
+Steps: 100      Time: 2            CPU Time: 16.4085s
+Writing: "patient_tn_refined_p6_iso_2.chk" (0.82523s, XML)
+Steps: 101      Time: 2.02         CPU Time: 16.302s 
+Steps: 102      Time: 2.04         CPU Time: 16.2971s
+Steps: 103      Time: 2.06         CPU Time: 16.3286s
+Steps: 104      Time: 2.08         CPU Time: 16.3333s
+Steps: 105      Time: 2.1          CPU Time: 16.2991s

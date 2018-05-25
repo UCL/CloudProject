@@ -1,0 +1,26 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0x2ae7620, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=4, req_array=0x2673d60, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0x285a580, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=10, req_array=0x2d15120, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+slurmstepd: error: *** STEP 70.0 ON compute17 CANCELLED AT 2018-05-22T19:53:11 DUE TO TIME LIMIT ***
+srun: error: compute19: task 2: Terminated
+srun: error: compute24: task 7: Terminated
+srun: error: compute23: task 6: Terminated
+srun: error: compute18: task 1: Terminated
+srun: error: compute21: task 4: Terminated
+srun: error: compute22: task 5: Terminated
+srun: error: compute20: task 3: Terminated
+srun: error: compute17: task 0: Terminated

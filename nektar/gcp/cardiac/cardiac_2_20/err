@@ -1,0 +1,43 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 35.0 ON compute8 CANCELLED AT 2018-05-22T12:58:11 DUE TO TIME LIMIT ***
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907)....................: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffea5ee1df0, count=1, MPI_INT, MPI_MIN, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764)..............: 
+MPIR_Allreduce_intra(257).............: 
+allreduce_intra_or_coll_fn(163).......: 
+MPIR_Allreduce_intra(417).............: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+MPIR_Allreduce_intra(268).............: 
+MPIR_Bcast_impl(1452).................: 
+MPIR_Bcast(1476)......................: 
+MPIR_Bcast_intra(1287)................: 
+MPIR_Bcast_binomial(310)..............: Failure during collective
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907).......: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffe8b37d580, count=1, MPI_INT, MPI_MIN, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764).: 
+MPIR_Allreduce_intra(268): 
+MPIR_Bcast_impl(1452)....: 
+MPIR_Bcast(1476).........: 
+MPIR_Bcast_intra(1287)...: 
+MPIR_Bcast_binomial(310).: Failure during collective
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907).......: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffc673a6000, count=1, MPI_INT, MPI_MIN, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764).: 
+MPIR_Allreduce_intra(268): 
+MPIR_Bcast_impl(1452)....: 
+MPIR_Bcast(1476).........: 
+MPIR_Bcast_intra(1287)...: 
+MPIR_Bcast_binomial(310).: Failure during collective
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907).......: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffcdc4d7340, count=1, MPI_INT, MPI_MIN, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764).: 
+MPIR_Allreduce_intra(268): 
+MPIR_Bcast_impl(1452)....: 
+MPIR_Bcast(1476).........: 
+MPIR_Bcast_intra(1287)...: 
+MPIR_Bcast_binomial(310).: Failure during collective
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907).......: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7fffc813f5d0, count=1, MPI_INT, MPI_MIN, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764).: 
+MPIR_Allreduce_intra(268): 
+MPIR_Bcast_impl(1452)....: 

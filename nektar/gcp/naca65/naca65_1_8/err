@@ -1,0 +1,2 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 49.0 ON compute10 CANCELLED AT 2018-05-22T16:12:41 DUE TO TIME LIMIT ***

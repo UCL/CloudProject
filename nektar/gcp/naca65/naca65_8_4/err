@@ -1,0 +1,67 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907)....................: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffc12f770d0, count=1, MPI_INT, MPI_MAX, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764)..............: 
+MPIR_Allreduce_intra(257).............: 
+allreduce_intra_or_coll_fn(163).......: 
+MPIR_Allreduce_intra(417).............: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 28
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 4
+MPIR_Allreduce_intra(268).............: 
+MPIR_Bcast_impl(1452).................: 
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907).............: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffd0fb9e2e0, count=1, MPI_INT, MPI_MAX, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764).......: 
+MPIR_Allreduce_intra(257)......: 
+allreduce_intra_or_coll_fn(163): 
+MPIR_Allreduce_intra(417)......: 
+MPIC_Sendrecv(483).............: 
+MPIDI_EagerContigIsend(573)....: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)...........: Communication error with rank 28
+MPIR_Allreduce_intra(417)......: 
+MPIC_Sendrecv(483).............: 
+MPIDI_EagerContigIsend(573)....: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)...........: Communication error with rank 16
+MPIR_Allreduce_intra(417)......: 
+MPIC_Sendrecv(483).............: 
+MPIDI_EagerContigIsend(573)....: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)...........: Communication error with rank 8
+MPIR_Allreduce_intra(268)......: 
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907)....................: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7fffed977930, count=1, MPI_INT, MPI_MAX, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764)..............: 
+MPIR_Allreduce_intra(257).............: 
+allreduce_intra_or_coll_fn(163).......: 
+MPIR_Allreduce_intra(417).............: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 8
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 16
+MPIR_Allreduce_intra(268).............: 
+MPIR_Bcast_impl(1452).................: 
+MPIR_Bcast(1476)......................: 
+MPIR_Bcast_intra(1287)................: 
+MPIR_Bcast_binomial(310)..............: Failure during collective
+MPIR_Bcast_impl(1452)..........: 
+MPIR_Bcast(1476)...............: 
+MPIR_Bcast_intra(1287).........: 
+MPIR_Bcast_binomial(310).......: Failure during collective
+MPIR_Bcast(1476)......................: 
+MPIR_Bcast_intra(1287)................: 
+MPIR_Bcast_binomial(310)..............: Failure during collective
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907).......: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7fffccc795b0, count=1, MPI_INT, MPI_MAX, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764).: 
+srun: error: compute8: tasks 28-31: Terminated

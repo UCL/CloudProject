@@ -1,0 +1,8 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 72.0 ON compute29 CANCELLED AT 2018-05-22T17:45:41 DUE TO TIME LIMIT ***
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=2, req_array=0x7ffc2795e640, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+srun: error: compute30: task 1: Terminated
+srun: error: compute29: task 0: Terminated

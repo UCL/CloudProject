@@ -1,0 +1,73 @@
+
+------------------------------------------------------------
+Sender: LSF System <hpcadmin@m5090>
+Subject: Job 167901: <naca64_8_1> Exited
+
+Job <naca64_8_1> was submitted from host <cosma-b> by user <dc-dave3> in cluster <cosma-p_cluster1>.
+Job was executed on host(s) <1*m5090>, in queue <cosma5>, as user <dc-dave3> in cluster <cosma-p_cluster1>.
+                            <1*m5091>
+                            <1*m5092>
+                            <1*m5093>
+                            <1*m5094>
+                            <1*m5095>
+                            <1*m5096>
+                            <1*m5097>
+</cosma/home/ds006/dc-dave3> was used as the home directory.
+</cosma/home/ds006/dc-dave3/data/trials/nektar/test-cases/naca65> was used as the working directory.
+Started at Thu May 24 12:58:01 2018
+Results reported at Thu May 24 13:28:36 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+#BSUB -L /bin/bash
+#BSUB -n 8
+#BSUB -J naca64_8_1
+#BSUB -o nektar_8_1.o
+#BSUB -e nektar_8_1.e
+#BSUB -R "span[ptile=1]"
+#BSUB -q cosma5
+#BSUB -P ds006
+#BSUB -W 0:30
+
+module purge
+module load gnu_comp/c5/4.8.1 intel_mpi/2017
+module load fftw/3.3.4
+module load cmake/3.7.0
+module load boost/1_57_0
+export LD_LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH
+
+directory=$(pwd)/naca64_8_1
+mkdir -p $directory
+cd $directory
+ln -s ../NACA65_2-5D.xml ../NACA65-geometry.xml .
+mkdir initial_condition.rst
+cd initial_condition.rst
+ln -s ../../initial_condition.rst/* .
+cd ..
+binpath=/cosma5/data/ds006/dc-dave3/software/bin
+time mpirun $binpath/IncNavierStokesSolver     NACA65_2-5D.xml  NACA65-geometry.xml 1> out 2> err
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time   :  13691.00 sec.
+    Max Memory :      4138 MB
+    Max Swap   :      5788 MB
+
+    Max Processes  :        16
+    Max Threads    :        24
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <nektar_8_1.e> for stderr output of this job.
+

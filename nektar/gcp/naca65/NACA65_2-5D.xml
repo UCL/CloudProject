@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<NEKTAR>
+	<!-- C[100,1013] is my physical surface -->
+	<EXPANSIONS>
+        <E COMPOSITE="C[100,101]" NUMMODES="7" TYPE="MODIFIED" FIELDS="u,v,w,p" />
+    </EXPANSIONS>
+
+    <CONDITIONS>
+    
+    	<SOLVERINFO>
+            <I PROPERTY="SolverType"                    VALUE="VelocityCorrectionScheme"/>
+            <I PROPERTY="EQTYPE"                        VALUE="UnsteadyNavierStokes"    />
+            <I PROPERTY="EvolutionOperator"             VALUE="Nonlinear"               />
+            <I PROPERTY="Projection"                    VALUE="Galerkin"                />
+            <I PROPERTY="GlobalSysSoln"                 VALUE="XxtMultiLevelStaticCond" />
+            <I PROPERTY="TimeIntegrationMethod"         VALUE="IMEXOrder2"              />
+            <I PROPERTY="Driver"                        VALUE="Standard"                />
+            <I PROPERTY="SpectralVanishingViscosity"    VALUE="True"                    />
+	    <I PROPERTY="SPECTRALHPDEALIASING"          VALUE="True"                    />
+	    <I PROPERTY="HOMOGENEOUS"			VALUE="1D"			/>
+	    <I PROPERTY="USEFFT"                        VALUE="FFTW"                    />
+       </SOLVERINFO>
+       
+       <PARAMETERS>
+	    <!-- Need to pick Delta t strategically, dont want CFL number to be too large! -->	
+            <P> TimeStep       = 2e-5                </P>
+            <!--  Final time -->
+            <P> T              = 4.00             </P>
+            <P> NumSteps       = T/TimeStep          </P>
+            <P> IO_CheckSteps  = NumSteps/5          </P>
+            <P> IO_InfoSteps   = 1                   </P>
+            <P> IO_CFLSteps    = 10	             </P>
+            <!-- Reynolds number -->
+            <P> Re             = 135000               </P>
+            <P> Kinvis         = 1/Re                </P>
+            <!-- SVV parameters -->
+            <P> SVVCutoffRatio = 0.5                 </P>
+            <P> SVVDiffCoeff   = 1.0                 </P>
+            <P> HomModesZ      = 128                  </P>
+            <P> LZ             = 0.2                 </P> 
+        </PARAMETERS>
+        
+        
+        <VARIABLES>
+            <V ID="0">u</V>
+            <V ID="1">v</V>
+            <V ID="2"> w </V>
+            <V ID="3">p</V>
+        </VARIABLES>
+        
+        <BOUNDARYREGIONS>
+        	<B ID="0"> C[7,8,9,10]   </B>   <!-- Wall    -->
+        	<B ID="1"> C[1]   </B>   <!-- Inflow    -->
+        	<B ID="2"> C[4]   </B>   <!-- Outflow    -->        	
+        	<B ID="3"> C[6]   </B>   <!-- Top    -->        	
+        	<B ID="4"> C[5]   </B>   <!-- Top    -->        	
+        	<B ID="5"> C[2]   </B>   <!-- Bottom    -->        	
+        	<B ID="6"> C[3]   </B>   <!-- Bottom    -->        	
+        </BOUNDARYREGIONS>
+        
+        <BOUNDARYCONDITIONS>
+            <REGION REF="0">
+                <D VAR="u" VALUE="0" />
+                <D VAR="v" VALUE="0" />
+                <D VAR="w" VALUE="0" />                
+                <N VAR="p" VALUE="0" USERDEFINEDTYPE="H" />
+            </REGION>
+            <REGION REF="1">
+                <D VAR="u" VALUE="0.7431" />
+                <D VAR="v" VALUE="0.6691" />
+                <D VAR="w" VALUE="0" />                
+                <N VAR="p" VALUE="0" USERDEFINEDTYPE="H" />
+            </REGION>
+            <REGION REF="2">
+                <N VAR="u" VALUE="0" />
+                <N VAR="v" VALUE="0" />
+				<N VAR="w" VALUE="0" />
+                <D VAR="p" VALUE="0.0" />
+            </REGION>
+            <REGION REF="3">
+                <P VAR="u" VALUE="[5]" />
+                <P VAR="v" VALUE="[5]" />
+                <P VAR="w" VALUE="[5]" />                
+                <P VAR="p" VALUE="[5]" />
+            </REGION>
+            <REGION REF="5">
+                <P VAR="u" VALUE="[3]" />
+                <P VAR="v" VALUE="[3]" />
+                <P VAR="w" VALUE="[3]" />                
+                <P VAR="p" VALUE="[3]" />
+            </REGION>
+            <REGION REF="4">
+                <P VAR="u" VALUE="[6]" />
+                <P VAR="v" VALUE="[6]" />
+                <P VAR="w" VALUE="[6]" />                
+                <P VAR="p" VALUE="[6]" />
+            </REGION>
+                <REGION REF="6">
+                <P VAR="u" VALUE="[4]" />
+                <P VAR="v" VALUE="[4]" />
+                <P VAR="w" VALUE="[4]" />                
+                <P VAR="p" VALUE="[4]" />
+            </REGION>
+        </BOUNDARYCONDITIONS>
+        
+        <FUNCTION NAME="InitialConditions">
+            <F VAR="u,v,p" FILE="initial_condition.rst" />
+            <E VAR="w" VALUE="0.0" />
+	</FUNCTION>
+    </CONDITIONS>    
+
+    <FILTERS> 
+        <FILTER TYPE="AverageFields"> 
+                <PARAM NAME="OutputFile">Avg_field</PARAM> 
+                <PARAM NAME="OutputFrequency">25000</PARAM> 
+                <PARAM NAME="SampleFrequency"> 5 </PARAM> 
+        </FILTER> 
+
+		<FILTER TYPE="ModalEnergy">
+			<PARAM NAME="OutputFile">EnergyFile</PARAM>
+ 			<PARAM NAME="OutputFrequency">10</PARAM>
+	 	</FILTER>
+
+		<FILTER TYPE="Energy">
+			<PARAM NAME="OutputFrequency"> 10 </PARAM>
+		</FILTER>	
+
+        	<FILTER TYPE="ReynoldsStresses">
+            		<PARAM NAME="SampleFrequency"> 10 </PARAM>
+        	</FILTER>
+	
+    </FILTERS>
+
+
+   
+</NEKTAR>
