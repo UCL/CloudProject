@@ -1,0 +1,81 @@
+
+------------------------------------------------------------
+Sender: LSF System <hpcadmin@m5261>
+Subject: Job 168167: <naca64_16_4> Exited
+
+Job <naca64_16_4> was submitted from host <cosma-b> by user <dc-dave3> in cluster <cosma-p_cluster1>.
+Job was executed on host(s) <4*m5261>, in queue <cosma5>, as user <dc-dave3> in cluster <cosma-p_cluster1>.
+                            <4*m5264>
+                            <4*m5265>
+                            <4*m5266>
+                            <4*m5267>
+                            <4*m5287>
+                            <4*m5291>
+                            <4*m5293>
+                            <4*m5344>
+                            <4*m5345>
+                            <4*m5352>
+                            <4*m5353>
+                            <4*m5402>
+                            <4*m5405>
+                            <4*m5406>
+                            <4*m5408>
+</cosma/home/ds006/dc-dave3> was used as the home directory.
+</cosma/home/ds006/dc-dave3/data/trials/nektar/test-cases/naca65> was used as the working directory.
+Started at Fri May 25 12:14:02 2018
+Results reported at Fri May 25 12:44:29 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+#BSUB -L /bin/bash
+#BSUB -n 64
+#BSUB -J naca64_16_4
+#BSUB -o nektar_16_4.o
+#BSUB -e nektar_16_4.e
+#BSUB -R "span[ptile=4]"
+#BSUB -q cosma5
+#BSUB -P ds006
+#BSUB -W 0:30
+
+module purge
+module load gnu_comp/c5/4.8.1 intel_mpi/2017
+module load fftw/3.3.4
+module load cmake/3.7.0
+module load boost/1_57_0
+export LD_LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH
+
+directory=$(pwd)/naca64_16_4
+mkdir -p $directory
+cd $directory
+ln -s ../NACA65_2-5D.xml ../NACA65-geometry.xml .
+mkdir initial_condition.rst
+cd initial_condition.rst
+ln -s ../../initial_condition.rst/* .
+cd ..
+binpath=/cosma5/data/ds006/dc-dave3/software/bin
+time mpirun $binpath/IncNavierStokesSolver     NACA65_2-5D.xml  NACA65-geometry.xml 1> out 2> err
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time   : 109279.00 sec.
+    Max Memory :      5289 MB
+    Max Swap   :     19345 MB
+
+    Max Processes  :        80
+    Max Threads    :       144
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <nektar_16_4.e> for stderr output of this job.
+

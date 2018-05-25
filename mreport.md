@@ -50,6 +50,8 @@ Taking into account the current state of the infrastructure in Azure, it is clea
 would require very large initial and recurrent efforts from a dedicated IT team specifically trained
 to deal with Azure idiosyncrasies.
 
+We note that batch-shipyard is not the only solution on Azure for this approach. Some that we have not explored include [batch-mpi](https://docs.microsoft.com/en-us/azure/batch/batch-mpi) which has been used  to run OpenFOAM MPI as shown in this [blog post](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/).
+
 ## Transparent cloud work-flow
 
 The other option is for an IT team to recreate the standard HPC approach, but using a cloud
@@ -100,7 +102,7 @@ Gadget is an N-body/smooth particle hydrodynamics cosmology code. It uses fairly
 relies on hand-curated makefiles for compilation. It uses MPI-1 for communication. It requires a
 fair amount of input. Unfortunately, the input we were given to benchmark could not run below 128
 processors because of the way the IO is setup. Furthermore, it was not possible to run it on
-anything but 512 processors on cosma because of memory issues. Finally, although the code was
+anything but 512 processors on Cosma because of memory issues. Finally, although the code was
 compiled on the google cloud platform, it failed to run. It complained of memory issues, though that
 seemed unlikely to be the problem since it was running on nodes 32 with 16 process each and 900Gb of
 memory. In view of the time constraints, and noting that this old code uses non-portable
@@ -110,35 +112,31 @@ hand-curated makefile, I did not investigate further.
 
 Swiftsim is another smooth particle hydrodynamics cosmology code. Somewhat more modern than Gadget,
 it relies on the gnu autotools for building. It also seems to rely mostly on the MPI-1 standard. For
-the purpose of this project, the recipe in the [spack](https://spack.io) package manager was updated
+the purpose of this project, the recipe in the [Spack](https://Spack.io) package manager was updated
 to the latest Swiftsim version. Spack makes it simple to provision a cloud cluster with Swiftsim and
 all its dependencies. At time of writing, the pull-request has been accepted
-into the main spack repo.
+into the main Spack repo.
 
-Swiftsim was run on cosma and on the google cloud platform, with 8 processors. The main issue I
+Swiftsim was run on Cosma and on the google cloud platform, with 8 processors. The main issue I
 encountered was the amount of memory it requires. Eventually, the ultramem nodes that came online
 during the project did the trick.
 
 
 |      | Architecture | MPI   | compiler | Runtime (s) | Speedup |
 |------|--------------|-------|----------|-------------|---------|
-|cosma | Skylake      | intel | intel    |  4152.2     | 1       |
-|------|--------------|-------|----------|-------------|---------|
+|Cosma | Skylake      | intel | intel    |  4152.2     | 1       |
 |gpc   | Broadwell    | mpich | gcc      |  5897.3     | 0.70    |
 
 It is notable that the newer cloud hardware yields less performance. It is not clear exactly where
 the discrepancy comes from, whether the choice of compiler, libraries, or that the interconnect of
 the cloud infrastructure.
 
-MISSING: gcp with 4 nodes 2 procs, 2 nodes 4 procs, if memory allows
-MISSING: azure if I can get a cluster working
-
 ## Nektar++
 
 Nektar++ is a higher order finite element method. It is written in C++, and is built with CMake. It
 can make use MPI-IO when compiled with HDF5 support. More importantly, examples are provided where
 we can vary the number of processes and compute strong scaling graphs. For the purpose of this
-project, a recipe was added to spack to facilitate installation on the cloud
+project, a recipe was added to Spack to facilitate installation on the cloud
 platforms. At time of writing, the pull-request is still under discussion in
 the main repo.
 
@@ -146,8 +144,14 @@ Two types of runs with different communication characteristics are used. A simul
 electrophysiology of the heart is carried out. This is a 2d-surface with reduced communication
 requirements. A more demanding 2.5d calculation of the flow across a laterally-extended
 cross-section of a wing is also carried out. The lateral direction is performed via FFTs, whereas
-the cross-section plane is modelled with finite elements.
+the cross-section plane is modeled with finite elements.
 
-The two benchmark were run on the GCP.
+The two benchmark are run on the GCP and on Cosma. Several runs are performed for each benchmark, varying only the platform (GCP or Cosma), the number of nodes, and the number of processes per node. Below, we plot strong scaling speedup for each benchmark. The speedup is computed as the ratio of the average time per simulation step (excluding the first, which contains setup) for a single process job on Cosma vs the average time per step for a given job. These are *strong* scaling plots.
 
-MISSING: cosma benchmarks
+![](Nektar/benchmarks.png)
+
+The results of two benchmarks are diametrically opposed. In the case of the 2-d surface (Cardiac electro-physiology) with smaller communication requirements, we find that Nektar scales near linearly on both platforms. However, the GCP is substantially faster, with an approximate ratio of 1.4. This is not unexpected since the machine types are Broadwell on GCP, and Skylake on Cosma.
+However, in the case of the wing cross-section benchmark, we find that the scaling is no longer linear, and that Cosma performs better. Since this benchmarks incorporates fast-Fourier transforms, it is expected the scaling should be no longer linear. We note that, surprisingly, the GCP is slower than Cosma for a single process by a factor 0.95, even though the underlying machine is supposedly faster. There are several explanations for this behavior, including differences in available memory, access to the network drives, etc... Furthermore, at 128 processes, the ratio has decreased to 0.65, indicating that the cost of communication increases faster on the GCP than on Cosma.
+
+
+Where possible we run several configurations for the same number of processes, with different number of nodes and different number of processes per node. The hope is that the differences between the configuration are a measure of the cost of emitting internode messages vs intra-node messages, for the same communication pattern. However, there are two caveats, namely jitters between one run and the next, as well as hardware abstraction on the cloud. Indeed, when requesting two virtual machines on the cloud, it is not a given that they sit on different underlying hardware, or on different racks, or even in different data centers. Only at higher node counts can we be reasonably sure that the VMs sit on different actual machines. A more thorough study would be required to fully distinguish between jitter and communication costs. However, it does seem that differences between configurations are small in the cardiac electro-physiology benchmark for both platforms, as expected for benchmark where compute costs dominate. And it the differences are much more pronounced for the wing cross-section benchmark where communication costs are more important. I would not conclude on differences between platforms from this data.
