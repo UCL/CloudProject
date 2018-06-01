@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "dnsPrefix": {
-      "value": "swift"
+      "value": "nektar"
     },
     "adminUserName": {
       "value": "azureuser"

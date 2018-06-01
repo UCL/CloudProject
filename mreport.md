@@ -1,4 +1,4 @@
-# Cloud with multi-node communication
+# Cloud with multi-node communication
 
 The objective is to test the viability and performance of running multi-node jobs "on the cloud".
 Two cosmology software implementing MPI algorithms were initially selected for benchmarking, Gadget
@@ -50,7 +50,7 @@ Taking into account the current state of the infrastructure in Azure, it is clea
 would require very large initial and recurrent efforts from a dedicated IT team specifically trained
 to deal with Azure idiosyncrasies.
 
-We note that batch-shipyard is not the only solution on Azure for this approach. Some that we have not explored include [batch-mpi](https://docs.microsoft.com/en-us/azure/batch/batch-mpi) which has been used  to run OpenFOAM MPI as shown in this [blog post](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/).
+We note that batch-shipyard is not the only solution on Azure for this approach. Some that we have not explored include [batch-mpi](https://docs.microsoft.com/en-us/azure/batch/batch-mpi) which has been used  to run OpenFOAM MPI as shown in this [blog post](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/), or directly [provisioning VMs using the command-line tools](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/rdma-cluster).
 
 ## Transparent cloud work-flow
 
@@ -121,15 +121,28 @@ Swiftsim was run on Cosma and on the google cloud platform, with 8 processors. T
 encountered was the amount of memory it requires. Eventually, the ultramem nodes that came online
 during the project did the trick.
 
+Below, we show the speedup achieved for swift on the Eagle 25 benchmark. The
+reference value is the time taken to run the benchmark on Cosma with 8
+processes, 16 threads per process, and 1 process per node. The same version of
+the code is used in both cases. However, the code on Cosma is compiled with the
+intel compiler and MPI suite, whereas is compiled with gcc and mpich on the
+google compute platform. In all cases, we ran 16 threads per processes. To try
+and test the network speed and latency, we run different configurations of
+nodes and processes per node.  It is notable that the GCP results are much
+slower.  It could be the result of the diffence in compilers and hardware
+network.  Indeed, running 4 nodes and 2 processes per node is much slower than
+running 8 nodes and 1 process per node. However, there is anecdotal evidence
+that another issue could be behind the slowdown, namely network disk access.
+When running several benchmark simultaneously, the head on node became quite
+sluggish, even though no compute was being performed there. The network drive
+uses NFS. A more thorough series of tests with a Luster filesystem is waranted
+before dismissing the Google Cloud Platform completely. Indeed, it may be a
+sign that a cloud approach less slavish to reproducing the old HPC workflow is
+warranted.
 
-|      | Architecture | MPI   | compiler | Runtime (s) | Speedup |
-|------|--------------|-------|----------|-------------|---------|
-|Cosma | Skylake      | intel | intel    |  4152.2     | 1       |
-|gpc   | Broadwell    | mpich | gcc      |  5897.3     | 0.70    |
+![](swift/benchmarks.png)
 
-It is notable that the newer cloud hardware yields less performance. It is not clear exactly where
-the discrepancy comes from, whether the choice of compiler, libraries, or that the interconnect of
-the cloud infrastructure.
+
 
 ## Nektar++
 
@@ -150,7 +163,7 @@ The two benchmark are run on the GCP and on Cosma. Several runs are performed fo
 
 ![](Nektar/benchmarks.png)
 
-The results of two benchmarks are diametrically opposed. In the case of the 2-d surface (Cardiac electro-physiology) with smaller communication requirements, we find that Nektar scales near linearly on both platforms. However, the GCP is substantially faster, with an approximate ratio of 1.4. This is not unexpected since the machine types are Broadwell on GCP, and Skylake on Cosma.
+The results of two benchmarks are diametrically opposed. In the case of the 2-d surface (Cardiac electro-physiology) with smaller communication requirements, we find that Nektar scales near linearly on both platforms. However, the GCP is substantially faster, with an approximate ratio of 1.4. This is not unexpected since the machine types are Broadwell on GCP, and Sandy Bridge on Cosma.
 However, in the case of the wing cross-section benchmark, we find that the scaling is no longer linear, and that Cosma performs better. Since this benchmarks incorporates fast-Fourier transforms, it is expected the scaling should be no longer linear. We note that, surprisingly, the GCP is slower than Cosma for a single process by a factor 0.95, even though the underlying machine is supposedly faster. There are several explanations for this behavior, including differences in available memory, access to the network drives, etc... Furthermore, at 128 processes, the ratio has decreased to 0.65, indicating that the cost of communication increases faster on the GCP than on Cosma.
 
 

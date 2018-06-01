@@ -25,7 +25,7 @@ resources:
   properties:
     cluster_name            : gadgetoid
     static_node_count       : 1
-    max_node_count          : 512
+    max_node_count          : 32
     zone                    : europe-west1-d
     region                  : europe-west1
     cidr                    : 10.10.0.0/16
