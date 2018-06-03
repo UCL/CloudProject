@@ -1,0 +1,110 @@
+SharedMemoryAllocate 1073741824 SHMOPEN implementation 
+Set WorldShmCommBufs[0]=0x2b8b5ee67000(1073741824bytes)
+Set WorldShmCommBufs[1]=0x2b8b9ee67000(1073741824bytes)
+
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+__|_ |  |  |  |  |  |  |  |  |  |  |  | _|__
+__|_                                    _|__
+__|_   GGGG    RRRR    III    DDDD      _|__
+__|_  G        R   R    I     D   D     _|__
+__|_  G        R   R    I     D    D    _|__
+__|_  G  GG    RRRR     I     D    D    _|__
+__|_  G   G    R  R     I     D   D     _|__
+__|_   GGGG    R   R   III    DDDD      _|__
+__|_                                    _|__
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  
+
+
+Copyright (C) 2015 Peter Boyle, Azusa Yamaguchi, Guido Cossu, Antonin Portelli and other authors
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+Current Grid git commit hash=013ea4e8d1260b0e677716edae7db1143557f28e: (HEAD, origin/develop, origin/HEAD, develop)
+
+Grid : Message : 1756430 usec : Requesting 1073741824 byte stencil comms buffers 
+Grid : Message : 1756436 usec : Grid Default Decomposition patterns
+Grid : Message : 1756439 usec : 	OpenMP threads : 2
+Grid : Message : 1756446 usec : 	MPI tasks      : 2 1 1 1 
+Grid : Message : 1756463 usec : 	vRealF         : 256bits ; 1 2 2 2 
+Grid : Message : 1756468 usec : 	vRealD         : 256bits ; 1 1 2 2 
+Grid : Message : 1756473 usec : 	vComplexF      : 256bits ; 1 1 2 2 
+Grid : Message : 1756477 usec : 	vComplexD      : 256bits ; 1 1 1 2 
+Grid : Message : 1756488 usec : Grid is setup to use 2 threads
+Grid : Message : 1756492 usec : Number of iterations to average: 100
+Grid : Message : 1756496 usec : ====================================================================================================
+Grid : Message : 1756500 usec : = Benchmarking concurrent halo exchange in 1 dimensions
+Grid : Message : 1756503 usec : ====================================================================================================
+Grid : Message : 1756506 usec :  L  	 Ls  	bytes      MB/s uni (err/min/max)		MB/s bidi (err/min/max)
+Grid : Message : 1762566 usec : 4   	8	49152       6124.9  3540.5 105.2 16384.0		12249.7  7080.9 210.4 32768.0
+Grid : Message : 1785272 usec : 8   	8	393216     19332.2  700.1 5461.3 22795.1		38664.3  1400.2 10922.7 45590.3
+Grid : Message : 1850990 usec : 12  	8	1327104    13670.2  237.9 6267.3 15567.2		27340.4  475.9 12534.6 31134.4
+Grid : Message : 2043966 usec : 16  	8	3145728     8173.6  140.1 4582.3 10791.5		16347.2  280.3 9164.5 21583.0
+Grid : Message : 2492658 usec : 20  	8	6144000     6348.3  69.5 4355.9 6981.8		12696.5  138.9 8711.8 13963.6
+Grid : Message : 3431196 usec : 24  	8	10616832    4986.5  86.1 3148.3 6654.2		 9972.9  172.1 6296.6 13308.5
+Grid : Message : 4903334 usec : 28  	8	16859136    5115.8  39.4 3515.1 5741.7		10231.7  78.8 7030.1 11483.4
+Grid : Message : 7158856 usec : 32  	8	25165824    5011.6  59.0 3235.0 5854.6		10023.3  118.0 6470.0 11709.1
+Grid : Message : 7162217 usec : ====================================================================================================
+Grid : Message : 7162236 usec : = Benchmarking sequential halo exchange in 1 dimensions
+Grid : Message : 7162239 usec : ====================================================================================================
+Grid : Message : 7162242 usec :  L  	 Ls  	bytes      MB/s uni (err/min/max)		MB/s bidi (err/min/max)
+Grid : Message : 7164548 usec : 4   	8	49152      14023.4  431.9 4096.0 16384.0		28046.8  863.8 8192.0 32768.0
+Grid : Message : 7178300 usec : 8   	8	393216     19014.3  1074.7 3007.4 24576.0		38028.6  2149.3 6014.8 49152.0
+Grid : Message : 7226453 usec : 12  	8	1327104    14214.9  415.8 4163.5 17291.3		28429.8  831.6 8326.9 34582.5
+Grid : Message : 7457759 usec : 16  	8	3145728     6118.8  197.3 1861.4 9411.3		12237.6  394.5 3722.8 18822.6
+Grid : Message : 7969925 usec : 20  	8	6144000     5188.4  39.7 3540.7 5732.7		10376.9  79.3 7081.4 11465.4
+Grid : Message : 8768138 usec : 24  	8	10616832    5607.9  44.6 3659.1 5821.4		11215.9  89.1 7318.2 11642.9
+Grid : Message : 10102264 usec : 28  	8	16859136    5284.6  17.9 4830.0 5564.5		10569.1  35.7 9660.0 11129.1
+Grid : Message : 12211873 usec : 32  	8	25165824    5124.3  33.7 3360.6 5641.3		10248.7  67.4 6721.2 11282.6
+Grid : Message : 12215032 usec : ====================================================================================================
+Grid : Message : 12215051 usec : = Benchmarking concurrent STENCIL halo exchange in 1 dimensions
+Grid : Message : 12215055 usec : ====================================================================================================
+Grid : Message : 12215058 usec :  L  	 Ls  	bytes      MB/s uni (err/min/max)		MB/s bidi (err/min/max)
+Grid : Message : 12215835 usec : 4   	8	49152          0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12218345 usec : 8   	8	393216         0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12225308 usec : 12  	8	1327104        0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12239618 usec : 16  	8	3145728        0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12265029 usec : 20  	8	6144000        0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12306626 usec : 24  	8	10616832       0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12367807 usec : 28  	8	16859136       0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12454729 usec : 32  	8	25165824       0.0  0.0 0.0 0.0		    0.0  0.0 0.0 0.0
+Grid : Message : 12454840 usec : ====================================================================================================
+Grid : Message : 12454845 usec : = Benchmarking sequential STENCIL halo exchange in 1 dimensions
+Grid : Message : 12454850 usec : ====================================================================================================
+Grid : Message : 12454854 usec :  L  	 Ls  	bytes      MB/s uni (err/min/max)		MB/s bidi (err/min/max)
+Grid : Message : 12455621 usec : 4   	8	49152          0.0  0.0 0.0 0.0		    0.0  0.0 0.0 0.0
+Grid : Message : 12457395 usec : 8   	8	393216         0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12461360 usec : 12  	8	1327104        0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12469319 usec : 16  	8	3145728        0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12484490 usec : 20  	8	6144000        0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12510808 usec : 24  	8	10616832       0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12552195 usec : 28  	8	16859136       0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12614928 usec : 32  	8	25165824       0.0  0.0 0.0 -nan		    0.0  0.0 0.0 -nan
+Grid : Message : 12615017 usec : ====================================================================================================
+Grid : Message : 12615021 usec : = Benchmarking threaded STENCIL halo exchange in 1 dimensions
+Grid : Message : 12615024 usec : ====================================================================================================
+Grid : Message : 12615027 usec :  L  	 Ls  	bytes      MB/s uni (err/min/max)		MB/s bidi (err/min/max)
+
+libgomp: Out of memory allocating 927712937064 bytes
+
+libgomp: Out of memory allocating 927712937064 bytes
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[28146,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
