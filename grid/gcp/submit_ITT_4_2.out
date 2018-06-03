@@ -1,0 +1,87 @@
+SharedMemoryAllocate 1073741824 SHMOPEN implementation 
+Set WorldShmCommBufs[0]=0x2ae238323000(1073741824bytes)
+Set WorldShmCommBufs[1]=0x2ae278323000(1073741824bytes)
+Set WorldShmCommBufs[2]=0x2ae2b8323000(1073741824bytes)
+Set WorldShmCommBufs[3]=0x2ae2f8323000(1073741824bytes)
+
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+__|_ |  |  |  |  |  |  |  |  |  |  |  | _|__
+__|_                                    _|__
+__|_   GGGG    RRRR    III    DDDD      _|__
+__|_  G        R   R    I     D   D     _|__
+__|_  G        R   R    I     D    D    _|__
+__|_  G  GG    RRRR     I     D    D    _|__
+__|_  G   G    R  R     I     D   D     _|__
+__|_   GGGG    R   R   III    DDDD      _|__
+__|_                                    _|__
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+__|__|__|__|__|__|__|__|__|__|__|__|__|__|__
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  
+
+
+Copyright (C) 2015 Peter Boyle, Azusa Yamaguchi, Guido Cossu, Antonin Portelli and other authors
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+Current Grid git commit hash=013ea4e8d1260b0e677716edae7db1143557f28e: (HEAD, origin/develop, origin/HEAD, develop)
+
+Grid : Message : 2979631 usec : Requesting 1073741824 byte stencil comms buffers 
+Grid : Message : 2979649 usec : ==================================================================================
+Grid : Message : 2979658 usec : = Grid is setup to use 16 threads
+Grid : Message : 2979661 usec : ==================================================================================
+Grid : Message : 2979664 usec : Grid Default Decomposition patterns
+Grid : Message : 2979666 usec : 	OpenMP threads : 16
+Grid : Message : 2979670 usec : 	MPI tasks      : 2 1 1 1 
+Grid : Message : 2979686 usec : 	vReal          : 256bits ; 1 2 2 2 
+Grid : Message : 2979691 usec : 	vRealF         : 256bits ; 1 2 2 2 
+Grid : Message : 2979695 usec : 	vRealD         : 256bits ; 1 1 2 2 
+Grid : Message : 2979699 usec : 	vComplex       : 256bits ; 1 1 2 2 
+Grid : Message : 2979703 usec : 	vComplexF      : 256bits ; 1 1 2 2 
+Grid : Message : 2979707 usec : 	vComplexD      : 256bits ; 1 1 1 2 
+Grid : Message : 2979711 usec : ==================================================================================
+Grid : Message : 2979714 usec : ==================================================================================
+Grid : Message : 2979717 usec :  Wilson dslash 4D vectorised
+Grid : Message : 2979719 usec : ==================================================================================
+slurmstepd: error: *** JOB 5 ON compute001 CANCELLED AT 2018-06-01T10:48:48 DUE TO TIME LIMIT ***
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[29851,0],0] on node compute001
+  Remote daemon: [[29851,0],3] on node compute004
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: abort is already in progress...hit ctrl-c again to forcibly terminate
+
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
+mpirun: Forwarding signal 18 to job
