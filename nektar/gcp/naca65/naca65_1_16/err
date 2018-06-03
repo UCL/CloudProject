@@ -1,0 +1,2 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 52.0 ON compute25 CANCELLED AT 2018-05-22T16:14:12 DUE TO TIME LIMIT ***

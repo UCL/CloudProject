@@ -1,0 +1,9 @@
+module load mpi
+function mpirun() {
+    IFS=',' read -ra HOSTS <<< "$AZ_BATCH_HOST_LIST"
+    nodes=${#HOSTS[@]}
+    /usr/lib64/openmpi/bin/mpirun \
+        -np $nodes\
+        --hosts $AZ_BATCH_HOST_LIST \
+        --mca btl_tcp_if_exclude docker0 "$@"
+}

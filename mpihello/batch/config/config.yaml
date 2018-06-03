@@ -1,0 +1,5 @@
+batch_shipyard:
+  storage_account_settings: gadget
+global_resources:
+  docker_images:
+    - mdavezac/mpihello:0.0.3

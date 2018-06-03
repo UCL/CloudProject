@@ -1,0 +1,12 @@
+
+job_specifications:
+  - auto_complete: true
+    id: mpihello
+    tasks:
+      - singularity_image: docker://mdavezac/mpihello:0.0.10
+        multi_instance:
+          num_instances: pool_current_dedicated
+        command: /root/ascript.sh
+
+    allow_run_on_missing_image: true
+    remove_container_after_exit: true

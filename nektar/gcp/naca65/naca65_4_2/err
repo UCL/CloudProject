@@ -1,0 +1,13 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=10, req_array=0x17f8de0, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+slurmstepd: error: *** STEP 64.0 ON compute9 CANCELLED AT 2018-05-22T17:35:11 DUE TO TIME LIMIT ***
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=4, req_array=0x2c234d0, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+srun: error: compute13: tasks 2-3: Terminated
+srun: error: compute32: tasks 6-7: Terminated
+srun: error: compute14: tasks 4-5: Terminated

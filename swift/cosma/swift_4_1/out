@@ -1,0 +1,147 @@
+[0000] [00000.0] main: MPI is up and running with 4 node(s).
+
+ Welcome to the cosmological hydrodynamical code
+    ______       _________________
+   / ___/ |     / /  _/ ___/_  __/
+   \__ \| | /| / // // /_   / /   
+  ___/ /| |/ |/ // // __/  / /    
+ /____/ |__/|__/___/_/    /_/     
+ SPH With Inter-dependent Fine-grained Tasking
+
+ Version : 0.6.0
+ Revision: v0.7.0-dirty, Branch: (no branch), Date: 2018-03-02 10:31:10 +0100
+ Webpage : www.swiftsim.com
+
+ Config. options: '--prefix=/cosma/home/ds006/dc-dave3/data/software'
+
+ Compiler: ICC, Version: 17.0.20170213
+ CFLAGS  : '-idirafter /usr/include/linux -O3 -ansi_alias -xAVX -pthread -w2 -Wunused-variable -Wshadow -Werror'
+
+ HDF5 library version: 1.8.18
+ FFTW library version: 3.x (details not available)
+ MPI library: Intel(R) MPI Library 2017 Update 2 for Linux* OS (MPI std v3.1)
+
+[0000] [00000.0] main: CPU frequency used for tick conversion: 2599984123 Hz
+[0000] [00000.0] main: sizeof(part)        is  128 bytes.
+[0000] [00000.0] main: sizeof(xpart)       is   64 bytes.
+[0000] [00000.0] main: sizeof(spart)       is   64 bytes.
+[0000] [00000.0] main: sizeof(gpart)       is   96 bytes.
+[0000] [00000.0] main: sizeof(multipole)   is  236 bytes.
+[0000] [00000.0] main: sizeof(grav_tensor) is  228 bytes.
+[0000] [00000.0] main: sizeof(task)        is   64 bytes.
+[0000] [00000.0] main: sizeof(cell)        is  800 bytes.
+[0000] [00000.0] main: Reading runtime parameters from file 'eagle_25.yml'
+[0000] [00000.0] main: Using initial partition gridded cells
+[0000] [00000.0] main: grid set to [ 2 1 2 ].
+[0000] [00000.0] main: Using no repartitioning
+[0000] [00000.0] main: Reading ICs from file './EAGLE_ICs_25.hdf5'
+[0000] [00000.1] io_read_unit_system: Reading IC units from ICs.
+[0000] [00000.1] read_ic_serial: IC and internal units match. No conversion needed.
+[0000] [00017.6] read_ic_serial: Particle Type 5 not yet supported. Particles ignored
+[0000] [00067.4] main: Reading initial conditions took 67386.332 ms.
+[0000] [00067.4] main: Read 50726350 gas particles, 0 star particles and 0 gparts from the ICs.
+[0000] [00101.1] main: space_init took 33661.823 ms.
+[0000] [00101.1] main: space dimensions are [ 50.828 50.828 50.828 ].
+[0000] [00101.1] main: space is periodic.
+[0000] [00101.1] main: highest-level cell dimensions are [ 50 50 50 ].
+[0000] [00101.1] main: 342402849 parts in 125000 cells.
+[0000] [00101.1] main: 0 gparts in 125000 cells.
+[0000] [00101.1] main: 0 sparts in 125000 cells.
+[0000] [00101.1] main: maximum depth is 0.
+[0000] [00101.1] potential_print_backend: External potential is 'No external potential'.
+[0000] [00101.1] cooling_print_backend: Cooling function is 'No cooling'.
+[0000] [00101.1] chemistry_print_backend: Chemistry function is 'No chemistry'.
+[0000] [00101.1] engine_config: prefer NUMA-distant CPUs
+[0001] [00101.1] engine_compute_next_snapshot_time: Next output time set to t=1.000000e-03.
+[0002] [00101.1] engine_compute_next_snapshot_time: Next output time set to t=1.000000e-03.
+[0003] [00101.1] engine_compute_next_snapshot_time: Next output time set to t=1.000000e-03.
+[0000] [00101.1] engine_init: cpu map is [ 0 8 1 9 2 10 3 11 4 12 5 13 6 14 7 15 16 24 17 25 18 26 19 27 20 28 21 29 22 30 23 31 ].
+[0000] [00101.1] engine_policy: engine policies are [  'steal'  'keep'  'mpi'  'numa affinity'  'hydro'  ]
+[0000] [00101.1] eos_print: Equation of state: Ideal gas.
+[0000] [00101.1] eos_print: Adiabatic index gamma: 1.666667.
+[0000] [00101.1] hydro_props_print: Hydrodynamic scheme: Gadget-2 version of SPH (Springel 2005) in 3D.
+[0000] [00101.1] hydro_props_print: Hydrodynamic kernel: Cubic spline (M4) with eta=1.234800 (48.00 neighbours).
+[0000] [00101.1] hydro_props_print: Hydrodynamic relative tolerance in h: 0.00010 (+/- 0.0144 neighbours).
+[0000] [00101.1] hydro_props_print: Hydrodynamic integration: CFL parameter: 0.1000.
+[0000] [00101.1] hydro_props_print: Hydrodynamic integration: Max change of volume: 1.40 (max|dlog(h)/dt|=0.112157).
+[0000] [00101.1] engine_config: Absolute minimal timestep size: 6.938894e-20
+[0000] [00101.1] engine_config: Minimal timestep size (on time-line): 7.450580e-11
+[0000] [00101.1] engine_config: Maximal timestep size (on time-line): 7.812500e-05
+[0000] [00101.1] engine_compute_next_snapshot_time: Next output time set to t=1.000000e-03.
+[0000] [00101.1] engine_config: Restarts will be dumped every 6.000000 hours
+[0000] [00101.1] main: engine_init took 11.004 ms.
+[0000] [00101.1] main: Running on 1369611450 gas particles, 0 star particles and 0 DM particles (0 gravity particles)
+[0000] [00101.1] main: from t=0.000e+00 until t=1.000e-02 with 16 threads and 16 queues (dt_min=1.000e-10, dt_max=1.000e-04)...
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 31979 RUNNING AT m5384
+=   EXIT CODE: 9
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+
+------------------------------------------------------------
+Sender: LSF System <hpcadmin@m5380>
+Subject: Job 169294: <swift_4_1> Exited
+
+Job <swift_4_1> was submitted from host <cosma-c> by user <dc-dave3> in cluster <cosma-p_cluster1>.
+Job was executed on host(s) <1*m5380>, in queue <cosma5>, as user <dc-dave3> in cluster <cosma-p_cluster1>.
+                            <1*m5381>
+                            <1*m5383>
+                            <1*m5384>
+</cosma/home/ds006/dc-dave3> was used as the home directory.
+</cosma/home/ds006/dc-dave3/data/trials/swift> was used as the working directory.
+Started at Tue May 29 13:39:10 2018
+Results reported at Tue May 29 14:16:45 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+#BSUB -L /bin/bash
+#BSUB -n 4
+#BSUB -J swift_4_1
+#BSUB -o swift_4_1/out
+#BSUB -e swift_4_1/err
+#BSUB -R "span[ptile=1]"
+#BSUB -q cosma5
+#BSUB -P ds006
+#BSUB -W 24:00
+
+module purge
+module load intel_comp/c5/2017
+module load intel_mpi/2017
+module load hdf5
+module load fftw/3.3.4
+module load metis
+module load gsl
+export LD_LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH
+
+directory=$(pwd)/swift_4_1
+cd $directory
+binpath=/cosma5/data/ds006/dc-dave3/software/bin
+time mpirun $binpath/swift_mpi -s -a -t 16 -n 4096 eagle_25.yml
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with signal termination: Killed.
+
+Resource usage summary:
+
+    CPU time   :    513.70 sec.
+    Max Memory :      6303 MB
+    Max Swap   :      6992 MB
+
+    Max Processes  :         8
+    Max Threads    :        12
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <swift_4_1/err> for stderr output of this job.
+

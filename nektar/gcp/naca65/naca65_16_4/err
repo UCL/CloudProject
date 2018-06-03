@@ -1,0 +1,81 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=12, req_array=0x152cbe0, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=18, req_array=0xb936e0, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=10, req_array=0x2665c00, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0x1fcd9b0, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=12, req_array=0x251ab60, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=10, req_array=0x12e6c90, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=10, req_array=0x131d100, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=10, req_array=0x10c3f50, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=10, req_array=0x142b260, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=14, req_array=0x15e9570, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0xd73a40, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0x2a319b0, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+srun: error: compute30: tasks 60-63: Terminated
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0x18d1fa0, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+srun: error: compute25: tasks 40-43: Terminated
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0x1c79c90, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+srun: error: compute24: tasks 36-39: Terminated
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=12, req_array=0x210f190, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+srun: error: compute23: tasks 32-35: Terminated
+slurmstepd: error: *** STEP 59.0 ON compute15 CANCELLED AT 2018-05-22T17:15:12 DUE TO TIME LIMIT ***
+srun: error: compute28: tasks 52-55: Terminated
+Fatal error in PMPI_Waitall: Unknown error class, error stack:
+PMPI_Waitall(392).....................: MPI_Waitall(count=8, req_array=0x1a2ea00, status_array=0x1) failed
+MPIR_Waitall_impl(181)................: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+srun: error: compute26: tasks 44-47: Terminated
+srun: error: compute27: tasks 48-51: Terminated
+srun: error: compute20: tasks 20-23: Terminated
+srun: error: compute17: tasks 8-11: Terminated
+srun: error: compute22: tasks 28-31: Terminated
+srun: error: compute29: tasks 56-59: Terminated
+srun: error: compute19: tasks 16-19: Terminated
+srun: error: compute16: tasks 4-7: Terminated
+srun: error: compute18: tasks 12-15: Terminated
+srun: error: compute21: tasks 24-27: Terminated

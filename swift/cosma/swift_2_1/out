@@ -1,0 +1,104 @@
+[0000] [00000.0] main: MPI is up and running with 2 node(s).
+
+ Welcome to the cosmological hydrodynamical code
+    ______       _________________
+   / ___/ |     / /  _/ ___/_  __/
+   \__ \| | /| / // // /_   / /   
+  ___/ /| |/ |/ // // __/  / /    
+ /____/ |__/|__/___/_/    /_/     
+ SPH With Inter-dependent Fine-grained Tasking
+
+ Version : 0.6.0
+ Revision: v0.7.0-dirty, Branch: (no branch), Date: 2018-03-02 10:31:10 +0100
+ Webpage : www.swiftsim.com
+
+ Config. options: '--prefix=/cosma/home/ds006/dc-dave3/data/software'
+
+ Compiler: ICC, Version: 17.0.20170213
+ CFLAGS  : '-idirafter /usr/include/linux -O3 -ansi_alias -xAVX -pthread -w2 -Wunused-variable -Wshadow -Werror'
+
+ HDF5 library version: 1.8.18
+ FFTW library version: 3.x (details not available)
+ MPI library: Intel(R) MPI Library 2017 Update 2 for Linux* OS (MPI std v3.1)
+
+[0000] [00000.0] main: CPU frequency used for tick conversion: 2599971495 Hz
+[0000] [00000.0] main: sizeof(part)        is  128 bytes.
+[0000] [00000.0] main: sizeof(xpart)       is   64 bytes.
+[0000] [00000.0] main: sizeof(spart)       is   64 bytes.
+[0000] [00000.0] main: sizeof(gpart)       is   96 bytes.
+[0000] [00000.0] main: sizeof(multipole)   is  236 bytes.
+[0000] [00000.0] main: sizeof(grav_tensor) is  228 bytes.
+[0000] [00000.0] main: sizeof(task)        is   64 bytes.
+[0000] [00000.0] main: sizeof(cell)        is  800 bytes.
+[0000] [00000.0] main: Reading runtime parameters from file 'eagle_25.yml'
+[0000] [00000.0] main: Using initial partition gridded cells
+[0000] [00000.0] main: grid set to [ 2 1 1 ].
+[0000] [00000.0] main: Using no repartitioning
+[0000] [00000.0] main: Reading ICs from file './EAGLE_ICs_25.hdf5'
+[0000] [00000.1] io_read_unit_system: Reading IC units from ICs.
+[0000] [00000.1] read_ic_serial: IC and internal units match. No conversion needed.
+[0000] [00032.7] read_ic_serial: Particle Type 5 not yet supported. Particles ignored
+[0000] [00065.6] main: Reading initial conditions took 65592.711 ms.
+[0000] [00065.7] main: Read 50726350 gas particles, 0 star particles and 0 gparts from the ICs.
+
+------------------------------------------------------------
+Sender: LSF System <hpcadmin@m5350>
+Subject: Job 169291: <swift_2_1> Exited
+
+Job <swift_2_1> was submitted from host <cosma-c> by user <dc-dave3> in cluster <cosma-p_cluster1>.
+Job was executed on host(s) <1*m5350>, in queue <cosma5>, as user <dc-dave3> in cluster <cosma-p_cluster1>.
+                            <1*m5360>
+</cosma/home/ds006/dc-dave3> was used as the home directory.
+</cosma/home/ds006/dc-dave3/data/trials/swift> was used as the working directory.
+Started at Tue May 29 13:26:04 2018
+Results reported at Tue May 29 13:28:26 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+#BSUB -L /bin/bash
+#BSUB -n 2
+#BSUB -J swift_2_1
+#BSUB -o swift_2_1/out
+#BSUB -e swift_2_1/err
+#BSUB -R "span[ptile=1]"
+#BSUB -q cosma5
+#BSUB -P ds006
+#BSUB -W 24:00
+
+module purge
+module load intel_comp/c5/2017
+module load intel_mpi/2017
+module load hdf5
+module load fftw/3.3.4
+module load metis
+module load gsl
+export LD_LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH
+
+directory=$(pwd)/swift_2_1
+cd $directory
+binpath=/cosma5/data/ds006/dc-dave3/software/bin
+time mpirun $binpath/swift_mpi -s -a -t 16 -n 4096 eagle_25.yml
+------------------------------------------------------------
+
+Exited with exit code 255.
+
+Resource usage summary:
+
+    CPU time   :    106.00 sec.
+    Max Memory :      6262 MB
+    Max Swap   :      6780 MB
+
+    Max Processes  :         4
+    Max Threads    :         6
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <swift_2_1/err> for stderr output of this job.
+

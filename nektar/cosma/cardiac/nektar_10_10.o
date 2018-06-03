@@ -1,0 +1,72 @@
+
+------------------------------------------------------------
+Sender: LSF System <hpcadmin@m5042>
+Subject: Job 167825: <nektar_10_10> Exited
+
+Job <nektar_10_10> was submitted from host <cosma-c> by user <dc-dave3> in cluster <cosma-p_cluster1>.
+Job was executed on host(s) <10*m5042>, in queue <cosma5>, as user <dc-dave3> in cluster <cosma-p_cluster1>.
+                            <10*m5044>
+                            <10*m5045>
+                            <10*m5046>
+                            <10*m5048>
+                            <10*m5049>
+                            <10*m5050>
+                            <10*m5051>
+                            <10*m5065>
+                            <10*m5066>
+</cosma/home/ds006/dc-dave3> was used as the home directory.
+</cosma/home/ds006/dc-dave3/data/trials/nektar/test-cases/cardiac> was used as the working directory.
+Started at Thu May 24 11:27:39 2018
+Results reported at Thu May 24 11:57:52 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+#BSUB -L /bin/bash
+#BSUB -n 100
+#BSUB -J nektar_10_10
+#BSUB -o nektar_10_10.o
+#BSUB -e nektar_10_10.e
+#BSUB -R "span[ptile=10]"
+#BSUB -q cosma5
+#BSUB -P ds006
+#BSUB -W 0:30
+
+module purge
+module load gnu_comp/c5/4.8.1 intel_mpi/2017
+module load fftw/3.3.4
+module load cmake/3.7.0
+module load boost/1_57_0
+export LD_LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH
+
+directory=$(pwd)/cardiac_10_10
+mkdir -p $directory
+cd $directory
+cp ../conditions.xml ../patient_tn_refined_p6_iso.xml .
+
+binpath=/cosma5/data/ds006/dc-dave3/software/bin
+time mpirun $binpath/CardiacEPSolver     patient_tn_refined_p6_iso.xml conditions.xml 1> out 2> err
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time   : 164580.00 sec.
+    Max Memory :      4520 MB
+    Max Swap   :     31717 MB
+
+    Max Processes  :       110
+    Max Threads    :       210
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <nektar_10_10.e> for stderr output of this job.
+

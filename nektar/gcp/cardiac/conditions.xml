@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<NEKTAR>
+    <EXPANSIONS>
+        <E COMPOSITE="C[0]" NUMMODES="6" TYPE="MODIFIED" FIELDS="u" />
+    </EXPANSIONS>
+    <CONDITIONS>
+        <PARAMETERS>
+            <P> TimeStep = 0.02 </P>
+            <P> Substeps = 4 </P>
+            <P> FinTime  = 3000 </P>    <!-- milliseconds -->
+            <P> NumSteps = FinTime/TimeStep </P>
+            <P> IO_CheckSteps = 1/TimeStep </P>
+            <P> IO_InfoSteps = 1 </P>
+            <P> IterativeSolverTolerance = 1e-05 </P>
+            <P> Chi = 140 </P>
+            <P> Cm = 0.01 </P>
+	    <P> o_min = 0.01 </P>
+	    <P> o_max = 0.13341 </P>
+        </PARAMETERS>
+
+        <VARIABLES>
+            <V ID="0"> u </V>
+        </VARIABLES>
+
+        <SOLVERINFO>
+            <I PROPERTY="EQTYPE" VALUE="Monodomain" />
+            <I PROPERTY="CellModel" VALUE="CourtemancheRamirezNattel98" />
+            <I PROPERTY="Projection" VALUE="Continuous" />
+            <I PROPERTY="DiffusionAdvancement" VALUE="Implicit" />
+            <I PROPERTY="TimeIntegrationMethod" VALUE="IMEXOrder1" />
+            <I PROPERTY="GlobalSysSoln" VALUE="IterativeStaticCond" />
+        </SOLVERINFO>
+
+        <BOUNDARYREGIONS>
+        </BOUNDARYREGIONS>
+
+        <BOUNDARYCONDITIONS>
+        </BOUNDARYCONDITIONS>
+
+        <!--<FUNCTION NAME="AnisotropicConductivity">
+            <E VAR="fx,fy,fz" VALUE="1" />
+        </FUNCTION>-->
+
+        <FUNCTION NAME="InitialConditions">
+            <E VAR="u" VALUE="-81" />
+        </FUNCTION>
+
+    </CONDITIONS>
+
+    <STIMULI>
+        <STIMULUS TYPE="StimulusCirc" ID="0">
+            <p_x1> -15.24  </p_x1>
+            <p_y1>  14.02 </p_y1>
+            <p_z1>  6.87  </p_z1>
+            <p_r1>   3.0  </p_r1>
+            <p_is>   1.0  </p_is>
+            <p_strength> 50.0 </p_strength>
+
+            <PROTOCOL TYPE = "ProtocolS1S2">
+                <START> 0.0  </START>
+                <DURATION>  2.0 </DURATION>
+                <S1CYCLELENGTH> 300.0 </S1CYCLELENGTH>
+                <NUM_S1> 10 </NUM_S1>
+                <S2CYCLELENGTH>100.0 </S2CYCLELENGTH>
+            </PROTOCOL>
+        </STIMULUS>
+    </STIMULI>
+
+    <GLOBALOPTIMIZATIONPARAMETERS>
+
+        <BwdTrans>
+            <DO_GLOBAL_MAT_OP VALUE="0" />
+            <DO_BLOCK_MAT_OP TRI="0" QUAD="0" />
+        </BwdTrans>
+
+        <IProductWRTBase>
+            <DO_GLOBAL_MAT_OP VALUE="0" />
+            <DO_BLOCK_MAT_OP TRI="0" QUAD="0" />
+        </IProductWRTBase>
+
+        <MassMatrixOp>
+            <DO_GLOBAL_MAT_OP VALUE="0" />
+            <DO_BLOCK_MAT_OP TRI="1" QUAD="1" />
+        </MassMatrixOp>
+
+        <HelmholtzMatrixOp>
+            <DO_GLOBAL_MAT_OP VALUE="0" />
+            <DO_BLOCK_MAT_OP TRI="1" QUAD="1" />
+        </HelmholtzMatrixOp>
+
+    </GLOBALOPTIMIZATIONPARAMETERS>
+
+</NEKTAR>

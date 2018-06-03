@@ -1,0 +1,67 @@
+
+------------------------------------------------------------
+Sender: LSF System <hpcadmin@m5120>
+Subject: Job 167821: <nektar_5_5> Exited
+
+Job <nektar_5_5> was submitted from host <cosma-c> by user <dc-dave3> in cluster <cosma-p_cluster1>.
+Job was executed on host(s) <5*m5120>, in queue <cosma5>, as user <dc-dave3> in cluster <cosma-p_cluster1>.
+                            <5*m5161>
+                            <5*m5170>
+                            <5*m5245>
+                            <5*m5246>
+</cosma/home/ds006/dc-dave3> was used as the home directory.
+</cosma/home/ds006/dc-dave3/data/trials/nektar/test-cases/cardiac> was used as the working directory.
+Started at Thu May 24 10:30:42 2018
+Results reported at Thu May 24 11:01:16 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+#BSUB -L /bin/bash
+#BSUB -n 25
+#BSUB -J nektar_5_5
+#BSUB -o nektar_5_5.o
+#BSUB -e nektar_5_5.e
+#BSUB -R "span[ptile=5]"
+#BSUB -q cosma5
+#BSUB -P ds006
+#BSUB -W 0:30
+
+module purge
+module load gnu_comp/c5/4.8.1 intel_mpi/2017
+module load fftw/3.3.4
+module load cmake/3.7.0
+module load boost/1_57_0
+export LD_LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH
+
+directory=$(pwd)/cardiac_5_5
+mkdir -p $directory
+cd $directory
+cp ../conditions.xml ../patient_tn_refined_p6_iso.xml .
+
+binpath=/cosma5/data/ds006/dc-dave3/software/bin
+time mpirun $binpath/CardiacEPSolver     patient_tn_refined_p6_iso.xml conditions.xml 1> out 2> err
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time   :  42224.00 sec.
+    Max Memory :      3244 MB
+    Max Swap   :      8933 MB
+
+    Max Processes  :        30
+    Max Threads    :        55
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <nektar_5_5.e> for stderr output of this job.
+

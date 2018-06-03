@@ -1,0 +1,6 @@
+[0001] [00124.0] space.c:space_init():3012: Failed to allocate xparts.
+application called MPI_Abort(MPI_COMM_WORLD, -1) - process 1
+
+real	2m5.028s
+user	0m0.017s
+sys	0m0.037s

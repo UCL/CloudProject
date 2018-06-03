@@ -1,0 +1,5 @@
+/cosma/home/ds006/dc-dave3/.lsbatch/1527596762.169301.shell: line 24:  7444 Killed                  mpirun $binpath/swift_mpi -s -a -t 16 -n 4096 eagle_25.yml
+
+real	28m2.645s
+user	0m0.010s
+sys	0m0.020s

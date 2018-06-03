@@ -1,0 +1,48 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907)....................: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffc61b775c0, count=1, MPI_INT, MPI_MAX, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764)..............: 
+MPIR_Allreduce_intra(417).............: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 12
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 6
+Fatal error in MPI_Allreduce: Unknown error class, error stack:
+MPI_Allreduce(907)....................: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0x7ffd09070c50, count=1, MPI_INT, MPI_MAX, MPI_COMM_WORLD) failed
+MPIR_Allreduce_impl(764)..............: 
+MPIR_Allreduce_intra(417).............: 
+MPIDU_Complete_posted_with_error(1137): Process failed
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 2
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 4
+MPIR_Allreduce_intra(417).............: 
+MPIC_Sendrecv(483)....................: 
+srun: error: compute8: task 7: Terminated
+MPIDI_EagerContigIsend(573)...........: failure occurred while attempting to send an eager message
+MPIDI_CH3_iSendv(34)..................: Communication error with rank 8
+srun: error: compute13: task 12: Terminated
+srun: error: compute7: task 6: Terminated
+slurmstepd: error: *** STEP 69.0 ON compute1 CANCELLED AT 2018-05-22T19:53:11 DUE TO TIME LIMIT ***
+srun: error: compute9: task 8: Terminated
+srun: error: compute16: task 15: Terminated
+srun: error: compute15: task 14: Terminated
+srun: error: compute10: task 9: Terminated
+srun: error: compute5: task 4: Terminated
+srun: error: compute3: task 2: Terminated
+srun: error: compute4: task 3: Terminated
+srun: error: compute2: task 1: Terminated
+srun: error: compute6: task 5: Terminated
+srun: error: compute14: task 13: Terminated
+srun: error: compute12: task 11: Terminated
+srun: error: compute11: task 10: Terminated
+srun: error: compute1: task 0: Terminated

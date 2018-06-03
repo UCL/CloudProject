@@ -1,0 +1,12 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 42.0 ON compute11 CANCELLED AT 2018-05-22T14:59:11 DUE TO TIME LIMIT ***
+srun: error: compute19: task 7: Terminated
+srun: error: compute16: task 4: Terminated
+srun: error: compute20: task 8: Terminated
+srun: error: compute11: task 0: Terminated
+srun: error: compute17: task 5: Terminated
+srun: error: compute15: task 3: Terminated
+srun: error: compute21: task 9: Terminated
+srun: error: compute18: task 6: Terminated
+srun: error: compute13: task 2: Terminated
+srun: error: compute12: task 1: Terminated
